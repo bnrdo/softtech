@@ -6,13 +6,13 @@
                     http://www.springframework.org/schema/security 
                     http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     
-    <!-- We will be defining all security related configurations in this file -->
+    
     <http pattern="/login" security="none"/>
     
     <http use-expressions="true">
-        <intercept-url pattern="/**" access="isAuthenticated()"/> <!-- this means all URL in this app will be checked if user is authenticated -->
-        <form-login login-page="/login" default-target-url="/index" authentication-failure-url="/login"/>
-        <logout logout-url="/logout" logout-success-url="/index"/> <!-- the logout url we will use in JSP -->
+        <intercept-url pattern="/**" access="isAuthenticated()"/> 
+        <form-login login-page="/login" authentication-failure-url="/login-error"/>
+        <logout logout-url="/logout" logout-success-url="/index"/> 
     </http>
      
 	<authentication-manager>

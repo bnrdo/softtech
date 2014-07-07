@@ -49,11 +49,28 @@
 		</property>
 	</bean>
 	 -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-	    <property name="prefix" value="/WEB-INF/jsp/"/>
-	    <property name="suffix" value=".jsp"/>
+		
+	<bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
 	</bean>
+	 
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+		<property name="additionalDialects">
+	        <set>
+	            <bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect" />
+	        </set>
+	    </property>
+	</bean>
+		
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+		<property name="order" value="1" />
+		<!-- <property name="viewNames" value="*.html,*.xhtml" /> -->
+	</bean>
+	
 	<!-- 
 	<tx:annotation-driven />
 	<bean id="transactionManager"
