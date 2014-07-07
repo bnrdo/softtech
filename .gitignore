@@ -7,6 +7,7 @@
 *.jar
 *.war
 *.ear
+build
 
 target/**
 
@@ -25,7 +26,8 @@ hs_err_pid*
 .LSOverride
 
 # Icon must ends with two \r.
-Icon
+Icon
+
 
 # Thumbnails
 ._*
