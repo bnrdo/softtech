@@ -8,6 +8,9 @@
     
     
     <http pattern="/login" security="none"/>
+    <http pattern="/css/**" security="none"/>
+    <http pattern="/js/**" security="none"/>
+    <http pattern="/img/**" security="none"/>
     
     <http use-expressions="true">
         <intercept-url pattern="/**" access="isAuthenticated()"/> 
@@ -15,16 +18,6 @@
         <logout logout-url="/logout" logout-success-url="/index"/> 
     </http>
      
-	<authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="joseph" password="bagnes" authorities="Admin, User"/>
-                <user name="bernabe" password="jose" authorities="User"/>
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
-	
-	<!-- 
 	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
 	    <beans:property name="userDetailsService" ref="userDetailsService" ></beans:property>
 	    
@@ -33,15 +26,15 @@
 	<beans:bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
 	    <beans:property name="providers">
 	        <beans:list>
-	            <beans:ref local="daoAuthenticationProvider"/>
+	            <beans:ref bean="daoAuthenticationProvider"/>
 	        </beans:list>
 	    </beans:property>
 	</beans:bean>
 	
 	<authentication-manager>
 	    <authentication-provider user-service-ref="userDetailsService">
-	        <password-encoder hash="md5"></password-encoder>
+	        <password-encoder hash="sha-256"></password-encoder>
 	    </authentication-provider>
 	</authentication-manager>
-	 -->
+	 
 </beans:beans>

@@ -5,7 +5,7 @@
 </head>
 <body>
 	<h1>Enter your credentials</h1>
-	<div th:if="${param.error}">
+	<div th:if="${loginError}">
         Invalid username and/or password.
     </div>
 	<form th:action="@{/j_spring_security_check}" method="POST">
