@@ -8,10 +8,10 @@
 	
 	<title th:text="#{webapp.title}">SoftTech</title>
 	
-	<link rel="icon" type="image/ico" href="../../img/favicon.ico" th:href="@{/img/favicon.ico}" />
+	<link rel="icon" type="image/ico" href="../../../img/favicon.ico" th:href="@{/img/favicon.ico}" />
 	
-	<link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
-	<link href="../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	<link href="../../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	<link href="../../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,28 +38,20 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html" th:href="@{/}">Home</a></li>
-            <li><a href="aboutUs.html" th:href="@{/about}">About Us</a></li>
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Find a Resume</a></li>
+            <li><a href="#">Post a Job</a></li>
+            <li><a href="#">Request Phone Screen</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="login.html" th:href="@{/signin}">Sign In</a></li>
-            <li><a href="register.html" th:href="@{/register}">New User Register</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Employers <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Sign In</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Post Jobs</a></li>
-                <li><a href="#">Search Resumes</a></li>
-              </ul>
-            </li>
+            <li><a href="#">Contact Us</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
-	<script src="../../js/docs.min.js" th:src="@{/js/docs.min.js}"></script>
+	<script src="../../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	<script src="../../../js/docs.min.js" th:src="@{/js/docs.min.js}"></script>
 </body>
 </html>
