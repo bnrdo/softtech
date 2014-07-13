@@ -27,7 +27,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#" th:text="#{brand.name}" th:href="/admin">SoftTech</a>
+              <a class="navbar-brand" href="#" th:text="#{brand.name}" th:href="@{/admin}">SoftTech</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,7 +37,7 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Management <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/admin/createUser')} ? 'active' : ''"><a href="createUser.html" th:href="@{/admin/createUser}">Create User</a></li>
+                    <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/admin/createUserAccount')} ? 'active' : ''"><a href="createUserAccount.html" th:href="@{/admin/createUserAccount}">Create User</a></li>
                   </ul>
                 </li>
               </ul>

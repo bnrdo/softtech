@@ -23,7 +23,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.softtech.web.controller", excludeFilters = { @Filter(Configuration.class) })
-@Import({ SecurityConfig.class })
+@Import({ SecurityConfig.class, ServiceConfig.class, StandaloneDataConfig.class })
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
@@ -40,9 +40,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/employer/signin").setViewName("recruiter/login");
 		registry.addViewController("/employer/requestPhoneScreen").setViewName("recruiter/requestPhoneScreen");
 		registry.addViewController("/employer/contact").setViewName("recruiter/contactUs");
-		registry.addViewController("/admin").setViewName("admin/index");
-		registry.addViewController("/admin/signin").setViewName("admin/login");
-		registry.addViewController("/admin/createUser").setViewName("admin/createUser");
 		
 	}
 
