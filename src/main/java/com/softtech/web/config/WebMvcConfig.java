@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -22,11 +23,27 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.softtech.web.controller", excludeFilters = { @Filter(Configuration.class) })
+@Import({ SecurityConfig.class })
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
+		
 		registry.addViewController("/").setViewName("index");
+		registry.addViewController("/signin").setViewName("login");
+		registry.addViewController("/register").setViewName("register");
+		registry.addViewController("/forgotPassword").setViewName("forgotPassword");
+		registry.addViewController("/about").setViewName("aboutUs");
+		registry.addViewController("/employer").setViewName("recruiter/index");
+		registry.addViewController("/employer/postJob").setViewName("recruiter/postJob");
+		registry.addViewController("/employer/searchResume").setViewName("recruiter/searchResume");
+		registry.addViewController("/employer/signin").setViewName("recruiter/login");
+		registry.addViewController("/employer/requestPhoneScreen").setViewName("recruiter/requestPhoneScreen");
+		registry.addViewController("/employer/contact").setViewName("recruiter/contactUs");
+		registry.addViewController("/admin").setViewName("admin/index");
+		registry.addViewController("/admin/signin").setViewName("admin/login");
+		registry.addViewController("/admin/createUser").setViewName("admin/createUser");
+		
 	}
 
 	@Override
@@ -43,7 +60,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public ServletContextTemplateResolver templateResolver() {
 
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
-		templateResolver.setPrefix("/WEB-INF/templates/");
+		templateResolver.setPrefix("/WEB-INF/views/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML5");
 		templateResolver.setOrder(1);
@@ -83,6 +100,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         messageSource.setCacheSeconds(15);
         
         return messageSource;
+        
     }
 
 }

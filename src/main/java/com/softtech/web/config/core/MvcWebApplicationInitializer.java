@@ -1,13 +1,15 @@
-package com.softtech.web.config;
+package com.softtech.web.config.core;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import com.softtech.web.config.WebMvcConfig;
 
 public class MvcWebApplicationInitializer extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { SecurityConfig.class };
+		return new Class[] { WebMvcConfig.class };
 	}
 
 	@Override
@@ -18,8 +20,9 @@ public class MvcWebApplicationInitializer extends
 
 	@Override
 	protected String[] getServletMappings() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new String[] { "/" };
+		
 	}
 
 }
