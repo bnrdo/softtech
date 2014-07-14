@@ -25,4 +25,7 @@ public class StandaloneDataConfig extends AbstractDataConfig {
             .build();
     }
 	
+	@Override
+	protected boolean showSql() { return true; }
+	
 }

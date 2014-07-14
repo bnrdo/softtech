@@ -2,14 +2,14 @@ package com.softtech.web.config.core;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import com.softtech.web.config.WebMvcConfig;
+import com.softtech.web.config.AppConfig;
 
 public class MvcWebApplicationInitializer extends
 		AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { WebMvcConfig.class };
+		return new Class[] { AppConfig.class };
 	}
 
 	@Override

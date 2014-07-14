@@ -23,8 +23,8 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.softtech.web.controller", excludeFilters = { @Filter(Configuration.class) })
-@Import({ SecurityConfig.class, ServiceConfig.class, StandaloneDataConfig.class })
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
+@Import({ SecurityConfig.class, ServiceConfig.class, StandaloneDataConfig.class, ProductionConfig.class })
+public class AppConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {

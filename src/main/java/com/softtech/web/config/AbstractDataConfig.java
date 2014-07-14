@@ -17,7 +17,7 @@ public abstract class AbstractDataConfig {
 	public EntityManagerFactory entityManagerFactory() {
 
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-		vendorAdapter.setShowSql(true);
+		vendorAdapter.setShowSql(showSql());
 		
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(vendorAdapter);
@@ -50,5 +50,7 @@ public abstract class AbstractDataConfig {
 	}
 	
 	public abstract DataSource dataSource();
+	
+	protected boolean showSql() { return false; }
 	
 }
