@@ -32,14 +32,14 @@ public class AdministratorController {
 	private UserService userService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String adminHome(){
+	public String adminHome() {
 		
 		return "admin/index";
 		
 	}
 	
 	@RequestMapping(value = "/createUserAccount", method = RequestMethod.GET)
-	public String createUserAccountSetup(Model model){
+	public String createUserAccountSetup(Model model) {
 		
 		model.addAttribute("userAccount", new UserAccount());
 		model.addAttribute("roles", roleService.getRolesForUserCreation());
@@ -49,7 +49,7 @@ public class AdministratorController {
 	}
 	
 	@RequestMapping(value = "/createUserAccount", method = RequestMethod.POST)
-	public String createUserAccount(UserAccount userAccount){
+	public String createUserAccount(UserAccount userAccount) {
 		
 		if(userAccount != null) {
 			try {

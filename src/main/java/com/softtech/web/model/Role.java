@@ -13,6 +13,18 @@ import javax.persistence.Table;
 @Table(name="role")
 public class Role {
 	
+	public static final Role USER = new Role("USER");
+	
+	public static final Role ADMIN = new Role("ADMIN");
+	
+	public static final Role SUPERVISOR = new Role("SUPERVISOR");
+	
+	public static final Role JOB_SEEKER = new Role("JOB_SEEKER");
+	
+	public static final Role RECRUITER_INTERNAL = new Role("RECRUITER_INTERNAL");
+	
+	public static final Role RECRUITER = new Role("RECRUITER");
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;

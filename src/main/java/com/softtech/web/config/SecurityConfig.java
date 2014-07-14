@@ -22,13 +22,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 			.authorizeRequests()
+				.antMatchers("/css/**", "/fonts/**", "/img/**", "/js/**", "/", "/register", "/forgotPassword", "/about").permitAll()
+				.antMatchers("/employer**/**").hasRole("RECRUITER")
+				.antMatchers("/admin**/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
-				.antMatchers("/admin/**").access("hasRole('ADMIN')")
 				.and()
 			.formLogin()
 				.loginPage("/signin")
 				.defaultSuccessUrl("/")
 				.failureUrl("/signin?error=1")
+				.permitAll()
 				.and()
 			.logout()
 				.logoutUrl("/logout")
