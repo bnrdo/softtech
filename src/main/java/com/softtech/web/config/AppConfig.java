@@ -37,7 +37,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/employer").setViewName("recruiter/index");
 		registry.addViewController("/employer/postJob").setViewName("recruiter/postJob");
 		registry.addViewController("/employer/searchResume").setViewName("recruiter/searchResume");
-		registry.addViewController("/employer/signin").setViewName("recruiter/login");
 		registry.addViewController("/employer/requestPhoneScreen").setViewName("recruiter/requestPhoneScreen");
 		registry.addViewController("/employer/contact").setViewName("recruiter/contactUs");
 		
