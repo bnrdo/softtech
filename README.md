@@ -15,4 +15,5 @@
 4. Type in `package tomcat7:run` in Goals
 5. In Source tab, click Add... > Select Java Project then click Ok > Select softtect then click Ok  
 6. Click Apply then Run.
-7. Grab a beer and enjoy!
+7. Wait for Tomcat to finish starting and then hit `http://localhost:8080`
+8. Grab a beer and enjoy!
