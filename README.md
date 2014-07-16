@@ -8,7 +8,7 @@
 6. The main difference of `development` and `production` environments is that the development environment is using an embedded HSQL database and the production environment is using the database source defined in the jdbc.properties inside `./src/main/resources`.
 7. Please note that the `development` environment is set to generate the DDL for the embedded HSQL database. Once the DDL is generated, Hibernate will look in the classpath for a file named `import.sql` and execute the scripts inside it. The `import.sql` of this project is located at `./src/main/resources`.
 
-##Running the project using the embedded Tomca container
+##Running the project using the embedded Tomcat container
 1. Make sure you already have the latest code from the GitHub repository and already imported the project in Eclipse.
 2. Right-click `pom.xml` > Run as > Maven build..
 3. In the Main tab, click `Browse Workspace...` > choose softtech then click ok
