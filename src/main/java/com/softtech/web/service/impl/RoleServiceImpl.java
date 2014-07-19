@@ -23,8 +23,8 @@ public class RoleServiceImpl implements RoleService {
 	
 	{
 		rolesToRemoveFromList = new ArrayList<Role>();
-		rolesToRemoveFromList.add(new Role("JOB_SEEKER"));
-		rolesToRemoveFromList.add(new Role("RECRUITER"));
+		rolesToRemoveFromList.add(new Role("ROLE_JOB_SEEKER"));
+		rolesToRemoveFromList.add(new Role("ROLE_RECRUITER"));
 	}
 	
 	public RoleServiceImpl() { }
