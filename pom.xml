@@ -187,7 +187,7 @@
 				<server>TomcatServer</server>
 				<path>/</path>
 				<systemProperties>
-					<spring.profiles.active>development</spring.profiles.active>
+					<spring.profiles.active>production</spring.profiles.active>
 				</systemProperties>
 			</configuration>
 		</plugin>

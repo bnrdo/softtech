@@ -40,11 +40,9 @@ public abstract class AbstractDataConfig {
 		
 	}
 	
-	private Properties additionalProperties() {
+	protected Properties additionalProperties() {
 		
-		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-		
+		Properties properties = new Properties();		
 		return properties;
 		
 	}

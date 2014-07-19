@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.softtech.web.model.User;
 import com.softtech.web.model.UserAccount;
+import com.softtech.web.model.UserStatus;
 import com.softtech.web.service.RoleService;
 import com.softtech.web.service.UserAccountService;
 import com.softtech.web.service.UserService;
@@ -57,6 +58,7 @@ public class AdministratorController {
 				userService.addUser(freshUser);
 				userAccount.setPassword(PasswordUtil.generateDefaultPassword());
 				userAccount.setOwner(freshUser);
+				userAccount.setStatus(UserStatus.ACTIVE);
 				userAccountService.addUserAccount(userAccount);			
 			} catch (Exception e) {
 				log.error(e.getMessage());

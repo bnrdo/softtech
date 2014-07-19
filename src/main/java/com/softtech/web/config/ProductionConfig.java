@@ -1,5 +1,7 @@
 package com.softtech.web.config;
 
+import java.util.Properties;
+
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
@@ -38,4 +40,10 @@ public class ProductionConfig extends AbstractDataConfig {
 		
 	}
 	
+	@Override
+	public Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		return properties;
+	}
 }

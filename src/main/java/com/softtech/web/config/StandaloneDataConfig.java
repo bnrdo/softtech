@@ -1,5 +1,7 @@
 package com.softtech.web.config;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
@@ -27,5 +29,11 @@ public class StandaloneDataConfig extends AbstractDataConfig {
 	
 	@Override
 	protected boolean showSql() { return true; }
-	
+
+	@Override
+	public Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+		return properties;
+	}	
 }
