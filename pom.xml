@@ -229,9 +229,9 @@
 	        		<artifactId>maven-war-plugin</artifactId>
 	        		<version>2.3</version>
 	        		<configuration>
-	          			<failOnMissingWebXml>false</failOnMissingWebXml>
 	          			<warName>ROOT</warName>
 	          			<outputDirectory>webapps</outputDirectory>
+	          			<webXml>src/main/resources/web.xml</webXml>
 					</configuration>
 				</plugin>
   			</plugins>
