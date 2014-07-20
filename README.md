@@ -17,3 +17,9 @@
 6. Click Apply then Run.
 7. Wait for Tomcat to finish starting and then hit `http://localhost:8080`
 8. Grab a beer and enjoy!
+
+##Deploying the project to Openshift
+
+For maven projects, Openshift expects a Maven profile named `openshift` to be present in pom.xml. Openshift also expects that the war file is named `ROOT.war` and placed in the directory specified in Jenkins.
+
+Go to [Jenkins](https://jenkins-geng.rhcloud.com) and login using the username `admin` and password that starts with **Capital 'B'**

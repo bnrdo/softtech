@@ -16,16 +16,20 @@ public class MainController {
 	public String home(HttpServletRequest request) {
 		
 		if(request.isUserInRole(Role.USER.getRoleName())) return "index";
-		if(request.isUserInRole(Role.RECRUITER.getRoleName())) return "recruiter/index";
+		if(recruiterRole(request)) return "recruiter/index";
 		if(internalUser(request)) return "admin/index";
 		
 		return "index";
 		
 	}
 
+	private boolean recruiterRole(HttpServletRequest request) {
+		return request.isUserInRole(Role.RECRUITER.getRoleName()) || 
+				request.isUserInRole(Role.RECRUITER_INTERNAL.getRoleName());
+	}
+
 	private boolean internalUser(HttpServletRequest request) {
-		return request.isUserInRole(Role.RECRUITER_INTERNAL.getRoleName()) || 
-				request.isUserInRole(Role.SUPERVISOR.getRoleName()) || 
+		return request.isUserInRole(Role.SUPERVISOR.getRoleName()) || 
 				request.isUserInRole(Role.ADMIN.getRoleName()) || 
 				request.isUserInRole(Role.USER.getRoleName());
 	}

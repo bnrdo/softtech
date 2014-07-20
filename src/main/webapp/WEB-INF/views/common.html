@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="active" th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/')} ? 'active' : ''"><a href="index.html" th:href="@{/}">Home</a></li>
-                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/about')} ? 'active' : ''"><a href="aboutUs.html" th:href="@{/about}">About Us</a></li>
+                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/about')} ? 'active' : ''"><a href="aboutUs.html" th:href="@{/about}">About us</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
               <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/signin')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="register.html" th:href="@{/signin}">Sign in</a></li>
