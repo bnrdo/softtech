@@ -1,7 +1,5 @@
 package com.softtech.web.config;
 
-import java.util.Properties;
-
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
@@ -20,11 +18,11 @@ import com.softtech.web.annotation.Production;
 @EnableJpaRepositories("com.softtech.web.dao")
 @PropertySource("classpath:jdbc.properties")
 @Production
-public class ProductionConfig extends AbstractDataConfig {
+public class ProductionDataConfig extends AbstractDataConfig {
 	
 	@Inject	private Environment env;
 	
-	public ProductionConfig() { }
+	public ProductionDataConfig() { }
 	
 	@Override
 	@Bean
@@ -40,10 +38,4 @@ public class ProductionConfig extends AbstractDataConfig {
 		
 	}
 	
-	@Override
-	public Properties additionalProperties() {
-		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "none");
-		return properties;
-	}
 }
