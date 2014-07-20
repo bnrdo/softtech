@@ -1,5 +1,9 @@
 package com.softtech.web.dao;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.softtech.web.model.UserAccount;
@@ -27,5 +31,9 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Intege
 	UserAccount findByUsername(String username);
 	
 	UserAccount findByEmail(String email);
+	
+	Page<UserAccount> findAll(Pageable pageable);
+	
+	List<UserAccount> findAll();
 	
 }

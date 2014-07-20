@@ -38,6 +38,7 @@
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Management <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
                     <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/admin/createUserAccount')} ? 'active' : ''"><a href="createUserAccount.html" th:href="@{/admin/createUserAccount}">Create User</a></li>
+                    <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/admin/userAccountList')} ? 'active' : ''"><a href="userAccountList.html" th:href="@{/admin/userAccountList}">User Accounts</a></li>
                   </ul>                  
                 </li>                
               </ul>
@@ -54,6 +55,9 @@
         </nav>
         
         <form style="visibility: hidden" id="formLogout" method="post" action="#" th:action="@{/logout}"></form>
+        <form style="visibility: hidden" id="formEditUser" method="post" action="#" th:action="@{/admin/editUserAccount}">
+        	<input type="text" name="email" id="emailToEditInput"/>
+        </form>
     </div>
     
     <footer th:fragment="footer">

@@ -8,29 +8,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.apache.commons.lang3.StringUtils;
 
 @Entity
 @Table(name="role")
 public class Role {
 	
-	public static final Role USER = new Role("USER");
+	public static final Role USER = new Role("ROLE_USER");
 	
-	public static final Role ADMIN = new Role("ADMIN");
+	public static final Role ADMIN = new Role("ROLE_ADMIN");
 	
-	public static final Role SUPERVISOR = new Role("SUPERVISOR");
+	public static final Role SUPERVISOR = new Role("ROLE_SUPERVISOR");
 	
-	public static final Role JOB_SEEKER = new Role("JOB_SEEKER");
+	public static final Role JOB_SEEKER = new Role("ROLE_JOB_SEEKER");
 	
-	public static final Role RECRUITER_INTERNAL = new Role("RECRUITER_INTERNAL");
+	public static final Role RECRUITER_INTERNAL = new Role("ROLE_RECRUITER_INTERNAL");
 	
-	public static final Role RECRUITER = new Role("RECRUITER");
+	public static final Role RECRUITER = new Role("ROLE_RECRUITER");
+	
+	public static final String ROLE_PREFIX = "ROLE_";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	private String roleName;
-	
+		
 	@ManyToMany(mappedBy = "roles")
 	private List<UserAccount> users;
 	
@@ -111,7 +116,7 @@ public class Role {
 
 	@Override
 	public String toString() {
-		return roleName;
+		return roleName==null ? null : StringUtils.removeStartIgnoreCase(roleName, ROLE_PREFIX);		
 	}
 	
 }

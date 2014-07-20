@@ -5,6 +5,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +38,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 		
 		List<Role> loadedRoles = new ArrayList<Role>();
 		for(Role role : userAccount.getRoles()) {
-			loadedRoles.add(roleService.getRoleByRoleName(role.getRoleName()));
+			Role roleToAdd = roleService.getRoleByDescription(role.getRoleName());
+			loadedRoles.add(roleToAdd);
 		}
 		
 		userAccount.setRoles(loadedRoles);
@@ -54,4 +61,41 @@ public class UserAccountServiceImpl implements UserAccountService {
 		
 	}
 
+	@Override
+	public List<UserAccount> findAll() {
+		List<UserAccount> accounts = userAccountRepository.findAll(); 
+		return accounts;
+	}
+	@Transactional(readOnly = false)
+	@Modifying
+	@Override
+	public void removeUserAccountsByEmail(String[] emails) {
+		List<UserAccount> accountsToRemove = new ArrayList<UserAccount>();
+		for(String email : emails){
+			UserAccount userAccount = userAccountRepository.findByEmail(email);
+			userAccount.getRoles().clear();
+			accountsToRemove.add(userAccount);
+		}
+		if(CollectionUtils.isNotEmpty(accountsToRemove)){
+			userAccountRepository.delete(accountsToRemove);
+		}
+	}
+
+	@Transactional(readOnly = false)
+	@Override
+	public void updateUserAccount(UserAccount userAccount) {
+		UserAccount origAccount = userAccountRepository.findByEmail(userAccount.getEmail());
+		if(origAccount!=null){
+			origAccount.getRoles().clear();
+			List<Role> loadedRoles = new ArrayList<Role>();
+			for(Role role : userAccount.getRoles()) {
+				Role roleToAdd = roleService.getRoleByDescription(role.getRoleName());
+				loadedRoles.add(roleToAdd);
+			}
+			origAccount.setStatus(userAccount.getStatus());
+			origAccount.setRoles(loadedRoles);
+			
+			userAccountRepository.save(origAccount);
+		}		
+	}	
 }

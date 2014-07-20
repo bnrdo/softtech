@@ -1,6 +1,9 @@
 package com.softtech.web.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,7 @@ import com.softtech.web.model.UserStatus;
 import com.softtech.web.service.RoleService;
 import com.softtech.web.service.UserAccountService;
 import com.softtech.web.service.UserService;
+import com.softtech.web.util.GenericUtils;
 import com.softtech.web.util.PasswordUtil;
 
 @Controller
@@ -56,6 +60,7 @@ public class AdministratorController {
 			try {
 				User freshUser = new User();
 				userService.addUser(freshUser);
+				userAccount.setUsername(GenericUtils.getDefaultUsernameInEmail(userAccount.getEmail()));
 				userAccount.setPassword(PasswordUtil.generateDefaultPassword());
 				userAccount.setOwner(freshUser);
 				userAccount.setStatus(UserStatus.ACTIVE);
@@ -63,12 +68,47 @@ public class AdministratorController {
 			} catch (Exception e) {
 				log.error(e.getMessage());
 			}
-			
-			userAccountService.addUserAccount(userAccount);
 		}
 		
-		return "redirect:/admin/createUserAccount";
+		return "redirect:/admin/createUserAccount";		
+	}
+	
+	@RequestMapping(value = "/userAccountList", method = RequestMethod.GET)
+	public String listUserAccounts(Model model) {
+		List<UserAccount> accounts = userAccountService.findAll();
+		model.addAttribute("accounts", accounts);
+		return "admin/userAccountList";
 		
+	}
+	
+	@RequestMapping(value = "/removeUserAccounts", method = RequestMethod.POST)
+	public String removeUserAccounts(HttpServletRequest request) {
+		String[] accountsToRemove = request.getParameterValues("accountsToRemove");	
+		userAccountService.removeUserAccountsByEmail(accountsToRemove);
+		return "redirect:/admin/userAccountList";		
+	}
+	
+	@RequestMapping(value = "/editUserAccount", method = RequestMethod.POST)
+	public String editUserAccounts(HttpServletRequest request, Model model) {
+		String accountToUpdate = request.getParameter("email");	
+		UserAccount account = userAccountService.findUserAccountByEmail(accountToUpdate);
+		model.addAttribute("userAccount", account);
+		model.addAttribute("userAssignedRoles", account.getRoles());
+		model.addAttribute("userAccountCurrentStatus", account.getStatus().toString());
+		model.addAttribute("roles", roleService.getRolesForUserCreation());		
+		return "admin/editUserAccount";	
+	}
+	
+	@RequestMapping(value = "/updateUserAccount", method = RequestMethod.POST)
+	public String updateUserAccount(UserAccount userAccount) {		
+		if(userAccount != null) {
+			try {
+				userAccountService.updateUserAccount(userAccount);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+			}
+		}		
+		return "redirect:/admin/userAccountList";		
 	}
 	
 }

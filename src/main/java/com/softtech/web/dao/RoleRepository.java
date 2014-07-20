@@ -8,4 +8,6 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
 	
 	Role findByRoleName(String roleName);
 	
+	Role findByDescription(String description);
+	
 }

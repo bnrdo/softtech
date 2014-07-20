@@ -3,9 +3,11 @@ package com.softtech.web.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.engine.FetchTiming;
 
 @Entity
 @Table(name="useraccount")
@@ -25,7 +30,7 @@ public class UserAccount implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="owner_id")
 	private User owner;
 	
@@ -33,7 +38,7 @@ public class UserAccount implements Serializable {
 	
 	private String password;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinTable(name="UserAccountsAndRoles",
 			joinColumns=@JoinColumn(name="user_id"),
 			inverseJoinColumns=@JoinColumn(name="role_id"))
@@ -119,4 +124,7 @@ public class UserAccount implements Serializable {
 				+ email + "]";
 	}
 	
+	public String getRoleList(){
+		return roles==null ? null : StringUtils.join(roles, ", ");
+	}	
 }

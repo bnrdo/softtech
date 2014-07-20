@@ -23,8 +23,8 @@ public class RoleServiceImpl implements RoleService {
 	
 	{
 		rolesToRemoveFromList = new ArrayList<Role>();
-		rolesToRemoveFromList.add(new Role("JOB_SEEKER"));
-		rolesToRemoveFromList.add(new Role("RECRUITER"));
+		rolesToRemoveFromList.add(new Role("ROLE_JOB_SEEKER"));
+		rolesToRemoveFromList.add(new Role("ROLE_RECRUITER"));
 	}
 	
 	public RoleServiceImpl() { }
@@ -42,6 +42,13 @@ public class RoleServiceImpl implements RoleService {
 	public Role getRoleByRoleName(String roleName) {
 		
 		return roleRepository.findByRoleName(roleName);
+		
+	}
+	
+	@Override
+	public Role getRoleByDescription(String description) {
+		
+		return roleRepository.findByDescription(description);
 		
 	}
 
