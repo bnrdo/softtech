@@ -34,22 +34,22 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="active" th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/admin')} ? 'active' : ''"><a href="index.html" th:href="@{/admin}">Home</a></li>
-                <li class="dropdown">
+                <li class="dropdown" th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/admin/createUserAccount') or #strings.endsWith(#httpServletRequest.getRequestURI(), '/admin/userAccountList')} ? 'active' : ''">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Management <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/admin/createUserAccount')} ? 'active' : ''"><a href="createUserAccount.html" th:href="@{/admin/createUserAccount}">Create User</a></li>
-                    <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/admin/userAccountList')} ? 'active' : ''"><a href="userAccountList.html" th:href="@{/admin/userAccountList}">User Accounts</a></li>
-                  </ul>                  
+                    <li><a href="createUserAccount.html" th:href="@{/admin/createUserAccount}">Create User</a></li>
+                    <li><a href="userAccountList.html" th:href="@{/admin/userAccountList}">User Accounts</a></li>
+                  </ul>
                 </li>                
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+				<li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span sec:authentication="name">Joseph</span> <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="/logout" th:href="@{#}" id="logoutLink">Sign out</a></li>                    
+                    <li><a th:href="@{#}" href="index.html" id="logoutLink">Sign out</a></li>	                    
                   </ul>
                 </li>
-	            </ul>
+			  </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>

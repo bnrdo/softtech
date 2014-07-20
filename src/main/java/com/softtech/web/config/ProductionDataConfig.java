@@ -20,11 +20,11 @@ import com.softtech.web.annotation.Production;
 @EnableJpaRepositories("com.softtech.web.dao")
 @PropertySource("classpath:jdbc.properties")
 @Production
-public class ProductionConfig extends AbstractDataConfig {
+public class ProductionDataConfig extends AbstractDataConfig {
 	
 	@Inject	private Environment env;
 	
-	public ProductionConfig() { }
+	public ProductionDataConfig() { }
 	
 	@Override
 	@Bean
@@ -41,9 +41,14 @@ public class ProductionConfig extends AbstractDataConfig {
 	}
 	
 	@Override
-	public Properties additionalProperties() {
-		Properties properties = new Properties();
+	protected Properties additionalProperties() {
+		
+		Properties properties = new Properties();	
 		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+		
 		return properties;
+		
 	}
+	
 }

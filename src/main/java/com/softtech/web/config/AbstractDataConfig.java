@@ -42,7 +42,9 @@ public abstract class AbstractDataConfig {
 	
 	protected Properties additionalProperties() {
 		
-		Properties properties = new Properties();		
+		Properties properties = new Properties();	
+		properties.setProperty("hibernate.hbm2ddl.auto", "none");
+		
 		return properties;
 		
 	}

@@ -1,5 +1,7 @@
 package com.softtech.web.config;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -12,13 +14,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 @EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private UserDetailsService userDetailsService;
+	
+	private @Inject UserDetailsService userDetailsService;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication().withUser("geng").password("1234").roles("USER");
-//		auth.inMemoryAuthentication().withUser("joseph").password("1234").roles("ADMIN");
 		auth.userDetailsService(userDetailsService).passwordEncoder(new ShaPasswordEncoder(256));
 	}
  

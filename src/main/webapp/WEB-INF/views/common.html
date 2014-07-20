@@ -37,20 +37,29 @@
                 <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/about')} ? 'active' : ''"><a href="aboutUs.html" th:href="@{/about}">About Us</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/register')} ? 'active' : ''"><a href="register.html" th:href="@{/register}">New User Register</a></li>
-                <li class="dropdown">
+              <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/signin')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="register.html" th:href="@{/signin}">Sign in</a></li>
+                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/register')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="register.html" th:href="@{/register}">Register</a></li>
+                <li class="dropdown" sec:authorize="isAnonymous()">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Employers <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
-                    <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer')} ? 'active' : ''"><a href="recruiter/login.html" th:href="@{/employer/signin}">Sign In</a></li>
+                    <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer')} ? 'active' : ''"><a href="recruiter/login.html" th:href="@{/employer}">Sign In</a></li>
                     <li class="divider"></li>
                     <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/postJobs')} ? 'active' : ''"><a href="recruiter/postJob.html" th:href="@{/employer/postJob}">Post Jobs</a></li>
                     <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/searchResume')} ? 'active' : ''"><a href="recruiter/searchResume.html" th:href="@{/employer/searchResume}">Search Resumes</a></li>
+                  </ul>
+                </li>
+                <li class="dropdown" sec:authorize="isAuthenticated()">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span sec:authentication="name">Joseph</span> <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a th:href="@{#}" href="index.html" id="logoutLink">Sign out</a></li>	                    
                   </ul>
                 </li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
+        
+        <form style="visibility: hidden" id="formLogout" method="post" action="#" th:action="@{/logout}"></form>
     </div>
     
     <footer th:fragment="footer">
