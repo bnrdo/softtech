@@ -205,12 +205,39 @@
 	        <version>2.3</version>
 	        <configuration>
 	          <failOnMissingWebXml>false</failOnMissingWebXml>
-	          <warName>ROOT.war</warName>
-	          <outputDirectory>webapps</outputDirectory>
 			</configuration>
 		</plugin>
 	</plugins>
   </build>
+  
+  <profiles>
+  	<profile>
+  		<id>openshift</id>
+  		<build>
+  			<plugins>
+  				<plugin>
+  					<groupId>org.apache.maven.plugins</groupId>
+  					<artifactId>maven-surefire-plugin</artifactId>
+  					<version>2.17</version>
+  					<configuration>
+  						<systemProperties>
+							<spring.profiles.active>production</spring.profiles.active>
+						</systemProperties>
+  					</configuration>
+  				</plugin>
+  				<plugin>
+	        		<artifactId>maven-war-plugin</artifactId>
+	        		<version>2.3</version>
+	        		<configuration>
+	          			<failOnMissingWebXml>false</failOnMissingWebXml>
+	          			<warName>ROOT</warName>
+	          			<outputDirectory>webapps</outputDirectory>
+					</configuration>
+				</plugin>
+  			</plugins>
+  		</build>
+  	</profile>
+  </profiles>
   
   <repositories>
   	<repository>
