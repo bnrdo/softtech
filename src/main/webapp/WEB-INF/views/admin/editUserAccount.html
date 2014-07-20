@@ -45,7 +45,7 @@
                 <div class="col-md-8">
                     <div class="checkbox" th:each="role : ${roles}">
                         <label>
-                            <input name="roles" type="checkbox" th:value="${role}" th:text="${role.description}" th:field="*{roles}" th:attrappend="id='cb_'+${role.description}">Supervisor</input>                            
+                            <input name="roles" type="checkbox" th:value="${role.id}" th:text="${role.description}" th:field="*{roles}" th:attrappend="id='cb_'+${role.description}">Supervisor</input>                            
                         </label>
                     </div>
                 </div>

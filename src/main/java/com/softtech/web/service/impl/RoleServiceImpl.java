@@ -52,4 +52,9 @@ public class RoleServiceImpl implements RoleService {
 		
 	}
 
+	@Override
+	public Role getRoleById(int id) {
+		return roleRepository.findById(id);
+	}
+
 }

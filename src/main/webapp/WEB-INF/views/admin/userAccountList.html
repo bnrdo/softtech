@@ -26,7 +26,7 @@
 			<form id="formManageUsers" action="#" th:action="@{/admin/removeUserAccounts}" method="POST" role="form">
 				<legend>User Accounts</legend>
 				<div id="confirmation"></div>	             
-		        <div class="col-md-12">
+		        <div class="col-md-12 table-responsive">
 		            <table class="table table-striped">
 		            	<thead>
 		             	<tr>
@@ -39,11 +39,11 @@
 		            	</thead>
 		            	<tbody>
 		            		<tr th:each="account : ${accounts}">
-		            			<td><a href="#" th:text="${account.email}" class="emailAccountLink">test@org.com</a></td>
-		            			<td th:text="${account.username}">username</td>
-		            			<td th:text="${account.status}">ACTIVE</td>
-		            			<td th:text="${account.roleList}">ADMIN</td> 
-		            			<td><input type="checkbox" th:value="${account.email}" name="accountsToRemove"/></td>                   			
+		            			<td data-title="Email"><a href="#" th:text="${account.email}" class="emailAccountLink">test@org.com</a></td>
+		            			<td data-title="Username" th:text="${account.username}">username</td>
+		            			<td data-title="Status" th:text="${account.status}">ACTIVE</td>
+		            			<td data-title="Roles" th:text="${account.roleList}">ADMIN</td> 
+		            			<td data-title="Remove"><input type="checkbox" th:value="${account.email}" name="accountsToRemove"/></td>                   			
 		            		</tr>
 		            	</tbody>
 		            </table>

@@ -12,4 +12,6 @@ public interface RoleService {
 	
 	Role getRoleByDescription(String description);
 	
+	Role getRoleById(int id);
+	
 }

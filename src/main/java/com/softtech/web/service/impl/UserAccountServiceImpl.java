@@ -38,7 +38,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 		
 		List<Role> loadedRoles = new ArrayList<Role>();
 		for(Role role : userAccount.getRoles()) {
-			Role roleToAdd = roleService.getRoleByDescription(role.getRoleName());
+			//id is bound in role name
+			Role roleToAdd = roleService.getRoleById(Integer.parseInt(role.getRoleName()));
 			loadedRoles.add(roleToAdd);
 		}
 		
@@ -89,7 +90,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 			origAccount.getRoles().clear();
 			List<Role> loadedRoles = new ArrayList<Role>();
 			for(Role role : userAccount.getRoles()) {
-				Role roleToAdd = roleService.getRoleByDescription(role.getRoleName());
+				//id is bound in role name
+				Role roleToAdd = roleService.getRoleById(Integer.parseInt(role.getRoleName()));
 				loadedRoles.add(roleToAdd);
 			}
 			origAccount.setStatus(userAccount.getStatus());
