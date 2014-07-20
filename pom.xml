@@ -205,6 +205,8 @@
 	        <version>2.3</version>
 	        <configuration>
 	          <failOnMissingWebXml>false</failOnMissingWebXml>
+	          <warName>ROOT.war</warName>
+	          <outputDirectory>webapps</outputDirectory>
 			</configuration>
 		</plugin>
 	</plugins>
