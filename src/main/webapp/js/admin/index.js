@@ -13,7 +13,7 @@ $(document).ready(function () {
 	});
 	
 	$('#userAccountRolesDiv ul li').each(function(){
-		$('#cb_'+$.trim($(this).text())).prop('checked', true);
+		$('#cb_role_'+$.trim($(this).text())).prop('checked', true);
 	});
 	
 	var currentStatus = $('#userAccountCurrentStatus').text();

@@ -28,7 +28,7 @@
 				<div id="confirmation"></div>
                 <div id="userAccountRolesDiv" style="display:none;">
                 	<ul>
-                		<li th:each="assignedRole : ${userAssignedRoles}" th:text="${assignedRole.description}"></li>
+                		<li th:each="assignedRole : ${userAssignedRoles}" th:text="${assignedRole.id}"></li>
                 	</ul>                	
                 </div>
                 <span style="display:none;" id="userAccountCurrentStatus" th:text="${userAccountCurrentStatus}"></span>
@@ -45,7 +45,7 @@
                 <div class="col-md-8">
                     <div class="checkbox" th:each="role : ${roles}">
                         <label>
-                            <input name="roles" type="checkbox" th:value="${role.id}" th:text="${role.description}" th:field="*{roles}" th:attrappend="id='cb_'+${role.description}">Supervisor</input>                            
+                            <input name="roles" type="checkbox" th:value="${role.id}" th:text="${role.description}" th:field="*{roles}" th:attrappend="id='cb_role_'+${role.id}">Supervisor</input>                            
                         </label>
                     </div>
                 </div>
