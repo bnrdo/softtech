@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="SoftTech" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<title th:text="#{webapp.title}">SoftTech</title>
+	
+	<link rel="icon" type="image/ico" href="../../img/favicon.ico" th:href="@{/img/favicon.ico}" />
+	
+	<link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	<link href="../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    
+    <div th:include="common :: header" role="navigation"></div>
+    
+    <div class="container">
+        
+        <form class="form-signin" role="form" th:action="@{/reset}" method="POST">
+        	<div class="alert alert-danger alert-dismissible" role="alert" th:if="${#vars[linkExpired]} != null">
+        		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  				<strong>Sorry</strong>, Reset link already expired!
+        	</div>
+        	<div class="alert alert-danger alert-dismissible" role="alert" th:if="${#vars[error]} != null">
+        		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  				<strong>Sorry</strong>, Password reset unsuccessful!
+        	</div>
+            <h2 class="form-signin-heading">Reset password</h2>
+            <input type="hidden" name="token" th:value="${#vars[token]}"/>
+            <input type="password" name="password" class="form-control" placeholder="enter new password" required="required" /><br />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
+        </form>
+        
+        <footer th:include="common :: footer"></footer>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
+</body>
+</html>
