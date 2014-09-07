@@ -6,8 +6,8 @@ import java.util.Set;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan.Filter;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -18,12 +18,14 @@ import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.softtech.web.controller", excludeFilters = { @Filter(Configuration.class) })
-@Import({ SecurityConfig.class, ServiceConfig.class, StandaloneDataConfig.class, ProductionDataConfig.class })
+@Import({ SecurityConfig.class, ServiceConfig.class, StandaloneDataConfig.class, ProductionDataConfig.class, MailConfig.class })
 public class AppConfig extends WebMvcConfigurerAdapter {
 
 	@Override
@@ -38,8 +40,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/employer/postJob").setViewName("recruiter/postJob");
 		registry.addViewController("/employer/searchResume").setViewName("recruiter/searchResume");
 		registry.addViewController("/employer/requestPhoneScreen").setViewName("recruiter/requestPhoneScreen");
-		registry.addViewController("/employer/contact").setViewName("recruiter/contactUs");
-		
+		registry.addViewController("/contact").setViewName("contactUs");
+		registry.addViewController("/reset").setViewName("reset");
 	}
 
 	@Override
@@ -59,16 +61,34 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		templateResolver.setPrefix("/WEB-INF/views/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML5");
-		templateResolver.setOrder(1);
+		templateResolver.setOrder(2);
 
 		return templateResolver;
+	}
+	
+	@Bean
+	public ClassLoaderTemplateResolver emailTemplateResolver() {
+
+		ClassLoaderTemplateResolver emailTemplateResolver = new ClassLoaderTemplateResolver();
+		emailTemplateResolver.setPrefix("mails/");
+		emailTemplateResolver.setTemplateMode("HTML5");
+		emailTemplateResolver.setCharacterEncoding("UTF-8");
+		emailTemplateResolver.setOrder(1);
+
+		return emailTemplateResolver;
 	}
 
 	@Bean
 	public SpringTemplateEngine templateEngine() {
 
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-		templateEngine.setTemplateResolver(templateResolver());
+		
+		//templateEngine.setTemplateResolver(templateResolver());
+		Set<ITemplateResolver> resolvers = new HashSet<ITemplateResolver>();
+		resolvers.add(emailTemplateResolver());
+		resolvers.add(templateResolver());
+		
+		templateEngine.setTemplateResolvers(resolvers);
 		
 		Set<IDialect> dialects = new HashSet<IDialect>(); 
 		dialects.add(new SpringSecurityDialect());

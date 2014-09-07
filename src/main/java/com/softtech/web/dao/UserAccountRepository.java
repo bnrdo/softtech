@@ -32,6 +32,8 @@ public interface UserAccountRepository extends JpaRepository<UserAccount, Intege
 	
 	UserAccount findByEmail(String email);
 	
+	UserAccount findByPasswordResetToken(String token);
+	
 	Page<UserAccount> findAll(Pageable pageable);
 	
 	List<UserAccount> findAll();

@@ -40,6 +40,7 @@
                 <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/about')} ? 'active' : ''"><a href="aboutUs.html" th:href="@{/about}">About us</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
+              <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/contact')} ? 'active' : ''"><a href="contactUs.html" th:href="@{/contact}">Contact Us</a></li>
               <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/signin')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="register.html" th:href="@{/signin}">Sign in</a></li>
                 <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/register')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="register.html" th:href="@{/register}">Register</a></li>
                 <li class="dropdown" sec:authorize="isAnonymous()">
@@ -50,7 +51,7 @@
                     <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/postJobs')} ? 'active' : ''"><a href="recruiter/postJob.html" th:href="@{/employer/postJob}">Post Jobs</a></li>
                     <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/searchResume')} ? 'active' : ''"><a href="recruiter/searchResume.html" th:href="@{/employer/searchResume}">Search Resumes</a></li>
                   </ul>
-                </li>
+                </li>                
                 <li class="dropdown" sec:authorize="isAuthenticated()">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span sec:authentication="name">Joseph</span> <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">

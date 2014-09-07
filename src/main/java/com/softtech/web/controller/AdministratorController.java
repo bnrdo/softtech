@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.softtech.web.model.User;
 import com.softtech.web.model.UserAccount;
 import com.softtech.web.model.UserStatus;
+import com.softtech.web.service.MailService;
 import com.softtech.web.service.RoleService;
 import com.softtech.web.service.UserAccountService;
 import com.softtech.web.service.UserService;
@@ -35,6 +36,8 @@ public class AdministratorController {
 	
 	@Inject
 	private UserService userService;
+	
+	@Inject MailService mailService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String adminHome() {
@@ -58,19 +61,24 @@ public class AdministratorController {
 		
 		if(userAccount != null) {
 			try {
-				User freshUser = new User();
-				userService.addUser(freshUser);
-				userAccount.setUsername(GenericUtils.getDefaultUsernameInEmail(userAccount.getEmail()));
-				userAccount.setPassword(PasswordUtil.generateDefaultPassword());
-				userAccount.setOwner(freshUser);
-				userAccount.setStatus(UserStatus.ACTIVE);
-				userAccountService.addUserAccount(userAccount);			
+				if(userAccountService.findUserAccountByEmail(userAccount.getEmail())==null){
+					User freshUser = new User();
+					userService.addUser(freshUser);
+					userAccount.setUsername(GenericUtils.getDefaultUsernameInEmail(userAccount.getEmail()));
+					userAccount.setPassword(PasswordUtil.generateDefaultPassword());
+					userAccount.setOwner(freshUser);
+					userAccount.setStatus(UserStatus.ACTIVE);
+					userAccountService.addUserAccount(userAccount);	
+				}else{
+					return "redirect:/admin/createUserAccount?accountExists=1";	
+				}
+						
 			} catch (Exception e) {
 				log.error(e.getMessage());
 			}
 		}
-		
-		return "redirect:/admin/createUserAccount";		
+				
+		return "redirect:/admin/createUserAccount?success=1";		
 	}
 	
 	@RequestMapping(value = "/userAccountList", method = RequestMethod.GET)
@@ -103,7 +111,7 @@ public class AdministratorController {
 	public String updateUserAccount(UserAccount userAccount) {		
 		if(userAccount != null) {
 			try {
-				userAccountService.updateUserAccount(userAccount);
+				userAccountService.updateUserAccountStatusAndRoles(userAccount);
 			} catch (Exception e) {
 				log.error(e.getMessage());
 			}

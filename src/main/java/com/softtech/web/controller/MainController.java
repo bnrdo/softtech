@@ -13,11 +13,11 @@ import com.softtech.web.model.Role;
 public class MainController {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String home(HttpServletRequest request) {
+	public String home(HttpServletRequest request) {		
 		
-		if(request.isUserInRole(Role.USER.getRoleName())) return "index";
-		if(recruiterRole(request)) return "recruiter/index";
 		if(internalUser(request)) return "admin/index";
+		if(recruiterRole(request)) return "recruiter/index";
+		if(request.isUserInRole(Role.USER.getRoleName())) return "index";		
 		
 		return "index";
 		

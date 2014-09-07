@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.apache.commons.lang3.StringUtils;
+
 @Entity
 @Table(name="user")
 public class User {
@@ -164,6 +166,11 @@ public class User {
 	
 	public void setUserAccounts(Collection<UserAccount> userAccounts) {
 		this.userAccounts = userAccounts;
+	}
+	public String getFullName(){
+		String first = StringUtils.isNotBlank(firstName) ? firstName : " ";
+		String last = StringUtils.isNotBlank(lastName) ? lastName : " ";
+		return first + " " + last;
 	}
 	
 }

@@ -17,5 +17,9 @@ public interface UserAccountService {
 	List<UserAccount> findAll();
 	
 	void removeUserAccountsByEmail(String[] emails);
+
+	UserAccount findUserAccountByPasswordResetToken(String token);
+
+	void updateUserAccountStatusAndRoles(UserAccount userAccount);
 	
 }

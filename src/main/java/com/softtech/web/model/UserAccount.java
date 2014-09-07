@@ -1,6 +1,7 @@
 package com.softtech.web.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,9 +17,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.engine.FetchTiming;
+
+import com.softtech.web.util.PasswordUtil;
 
 @Entity
 @Table(name="useraccount")
@@ -48,6 +52,11 @@ public class UserAccount implements Serializable {
 	private UserStatus status;
 	
 	private String email;
+	
+	private String passwordResetToken;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date passwordResetSentDate;
 	
 	public UserAccount() { }
 
@@ -79,6 +88,10 @@ public class UserAccount implements Serializable {
 
 	public String getPassword() {
 		return password;
+	}
+	
+	public String getPasswordForReset() throws Exception {
+		return PasswordUtil.generateDefaultPassword() + password;
 	}
 
 	public void setPassword(String password) {
@@ -126,5 +139,22 @@ public class UserAccount implements Serializable {
 	
 	public String getRoleList(){
 		return roles==null ? null : StringUtils.join(roles, ", ");
-	}	
+	}
+
+	public String getPasswordResetToken() {
+		return passwordResetToken;
+	}
+
+	public void setPasswordResetToken(String passwordResetToken) {
+		this.passwordResetToken = passwordResetToken;
+	}
+
+	public Date getPasswordResetSentDate() {
+		return passwordResetSentDate;
+	}
+
+	public void setPasswordResetSentDate(Date passwordResetSentDate) {
+		this.passwordResetSentDate = passwordResetSentDate;
+	}
+	
 }

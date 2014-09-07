@@ -6,10 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softtech.web.dao.UserAccountRepository;
 import com.softtech.web.model.Role;
 import com.softtech.web.model.UserAccount;
+import com.softtech.web.service.MailService;
 import com.softtech.web.service.RoleService;
 import com.softtech.web.service.UserAccountService;
 
@@ -26,6 +23,9 @@ public class UserAccountServiceImpl implements UserAccountService {
 	
 	@Inject
 	private UserAccountRepository userAccountRepository;
+	
+	@Inject 
+	private MailService mailService;
 	
 	@Inject
 	private RoleService roleService;
@@ -45,6 +45,8 @@ public class UserAccountServiceImpl implements UserAccountService {
 		
 		userAccount.setRoles(loadedRoles);
 		
+		userAccount = mailService.sendRegistrationMail(userAccount);
+		
 		userAccountRepository.save(userAccount);
 		
 	}
@@ -55,10 +57,16 @@ public class UserAccountServiceImpl implements UserAccountService {
 		return userAccountRepository.findByUsername(username);
 		
 	}
-	
+	@Override
 	public UserAccount findUserAccountByEmail(String email) {
 		
 		return userAccountRepository.findByEmail(email);
+		
+	}
+	@Override
+	public UserAccount findUserAccountByPasswordResetToken(String token) {
+		
+		return userAccountRepository.findByPasswordResetToken(token);
 		
 	}
 
@@ -85,6 +93,12 @@ public class UserAccountServiceImpl implements UserAccountService {
 	@Transactional(readOnly = false)
 	@Override
 	public void updateUserAccount(UserAccount userAccount) {
+		userAccountRepository.save(userAccount);				
+	}	
+	
+	@Transactional(readOnly = false)
+	@Override
+	public void updateUserAccountStatusAndRoles(UserAccount userAccount) {
 		UserAccount origAccount = userAccountRepository.findByEmail(userAccount.getEmail());
 		if(origAccount!=null){
 			origAccount.getRoles().clear();

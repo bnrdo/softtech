@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="SoftTech" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<title th:text="#{webapp.title}">SoftTech</title>
+	
+	<link rel="icon" type="image/ico" href="../../img/favicon.ico" th:href="@{/img/favicon.ico}" />
+	
+	<link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	<link href="../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    
+    <div th:include="common :: header" role="navigation"></div>
+    
+    <div class="container">
+    	<form class="form-horizontal" id="formContactUs" action="#" th:action="@{/contact}" method="POST" role="form">
+    		<div class="alert alert-success alert-dismissible" role="alert" th:if="${param.success} != null">
+        		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  				<strong>Success</strong>, Message sent!
+        	</div>
+        	<div class="alert alert-danger alert-dismissible" role="alert" th:if="${param.error} != null">
+        		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  				<strong>Sorry</strong>, Message not sent!
+        	</div>	
+	        <h4><small>contact</small> SoftTech</h4>
+	        <br/><br/>
+	        <div class="form-group">
+	            <label for="contact-name" class="col-lg-2 control-label">Name</label>
+	            <div class="col-lg-8">
+	                <input type="text" class="form-control" id="contact-name" name="senderName" placeholder="full name"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="contact-email" class="col-lg-2 control-label">Email</label>
+	            <div class="col-lg-8">
+	                <input type="email" class="form-control" id="contact-email" name="from" placeholder="you@example.com"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label for="contact-msg" class="col-lg-2 control-label">Message</label>
+	            <div class="col-lg-8">
+	                <textarea class="form-control" id="contact-msg" name="message" rows="5" placeholder="your message here"></textarea>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <div class="col-lg-4 pull-right">
+	            	<button type="submit" name="submit" class="btn btn-primary" data-loading-text="Sending..." id="submitContact" role="button">Send your message</button>
+	            </div>
+	        </div>   
+	    </form>  
+    </div>
+    
+    <footer th:include="common :: footer"></footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>	
+	<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
+</body>
+</html>

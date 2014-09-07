@@ -42,7 +42,7 @@
                 <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/requestPhoneScreen')} ? 'active' : ''"><a href="requestPhoneScreen.html" th:href="@{/employer/requestPhoneScreen}">Request Phone Screen</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/contact')} ? 'active' : ''"><a href="contactUs.html" th:href="@{/employer/contact}">Contact Us</a></li>
+                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/contact')} ? 'active' : ''"><a href="contactUs.html" th:href="@{/contact}">Contact Us</a></li>
                 <li class="dropdown" sec:authorize="isAuthenticated()">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span sec:authentication="name">Joseph</span> <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">
