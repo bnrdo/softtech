@@ -67,7 +67,7 @@ public class AdministratorController {
 					userAccount.setUsername(GenericUtils.getDefaultUsernameInEmail(userAccount.getEmail()));
 					userAccount.setPassword(PasswordUtil.generateDefaultPassword());
 					userAccount.setOwner(freshUser);
-					userAccount.setStatus(UserStatus.ACTIVE);
+					userAccount.setStatus(UserStatus.INACTIVE);
 					userAccountService.addUserAccount(userAccount);	
 				}else{
 					return "redirect:/admin/createUserAccount?accountExists=1";	

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.softtech.web.model.UserAccount;
+import com.softtech.web.model.UserStatus;
+import com.softtech.web.service.MailService;
 import com.softtech.web.service.UserAccountService;
 import com.softtech.web.util.PasswordUtil;
 
@@ -18,6 +20,8 @@ import com.softtech.web.util.PasswordUtil;
 public class PasswordResetController {
 	@Inject
 	private UserAccountService userAccountService;
+	@Inject
+	private MailService mailService;
 
 	@RequestMapping(value = "/reset", method = RequestMethod.GET)
 	public String getReset(@RequestParam("o") final String token, HttpServletRequest request){
@@ -42,6 +46,7 @@ public class PasswordResetController {
 			userAccount.setPassword(PasswordUtil.hashPassword(password));
 			userAccount.setPasswordResetToken(null);
 			userAccount.setPasswordResetSentDate(null);
+			userAccount.setStatus(UserStatus.ACTIVE);
 			userAccountService.updateUserAccount(userAccount);
 			return "redirect:/signin";
 		}else{
@@ -49,6 +54,32 @@ public class PasswordResetController {
 			return "reset";
 		}			
 	}
+	
+	@RequestMapping(value = "/sendReset", method = RequestMethod.POST)
+	public String doSendResetEmail(
+		@RequestParam("email") final String email) throws Exception{		
+		UserAccount userAccount = userAccountService.findUserAccountByEmail(email);		
+		if(userAccount!=null && mailService.sendPasswordResetMail(userAccount)){			
+			return "redirect:/forgotPassword?success=1";
+		}else{
+			return "redirect:/forgotPassword?notExists=1";
+		}			
+	}
+	
+	@RequestMapping(value = "/resetRevert", method = RequestMethod.GET)
+	public String getResetRevert(@RequestParam("o") final String token, HttpServletRequest request){
+		UserAccount userAccount = userAccountService.findUserAccountByPasswordResetToken(token);		
+		if(userAccount!=null && !isLinkExpired(userAccount.getPasswordResetSentDate(), new Date())){
+			userAccount.setPasswordResetToken(null);
+			userAccount.setPasswordResetSentDate(null);
+			userAccount.setStatus(UserStatus.ACTIVE);
+			userAccountService.updateUserAccount(userAccount);
+			request.setAttribute("successResetRevert", Boolean.TRUE);
+			return "login";
+		}else{
+			return "redirect:/forgotPassword?linkExpired=1";
+		}
+	}	
 	
 	private boolean isLinkExpired(Date earlierDate, Date laterDate)
 	{

@@ -14,6 +14,7 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import com.softtech.web.model.User;
 import com.softtech.web.model.UserAccount;
+import com.softtech.web.model.UserStatus;
 import com.softtech.web.service.MailService;
 import com.softtech.web.service.UserAccountService;
 @Service
@@ -69,21 +70,33 @@ public class MailServiceImpl implements MailService {
 	}
 	
 	@Override
-	public boolean sendPasswordResetMail(String email) {
-		UserAccount userAccount = userAccountService.findUserAccountByEmail(email);
-		if(userAccount!=null){
-			User user = userAccount.getOwner();
-			if(user!=null){
-				final Context ctx = new Context();
-				if(StringUtils.isNotBlank(user.getFullName())){
-					ctx.setVariable("name", user.getFullName());
+	public boolean sendPasswordResetMail(UserAccount userAccount) {
+		try{
+			if(userAccount!=null){
+				User user = userAccount.getOwner();
+				if(user!=null){
+					final Context ctx = new Context();
+					if(StringUtils.isNotBlank(user.getFullName())){
+						ctx.setVariable("name", user.getFullName());
+					}				
+					String token = userAccount.getPasswordForReset();
+					String resetLink = appLink + "/reset?o=" + token;	
+					String revertLink = appLink + "/resetRevert?&o=" + token;	
+					ctx.setVariable("passwordResetLink", resetLink);	
+					ctx.setVariable("revertLink", revertLink);			
+					boolean success = send(ctx, "password-reset-mail.html", genericFromAddress, genericFromName, userAccount.getEmail());
+					if(success){
+						userAccount.setPasswordResetToken(token);
+						userAccount.setPasswordResetSentDate(new Date());	
+						userAccount.setStatus(UserStatus.INACTIVE);
+						userAccountService.updateUserAccount(userAccount);
+					}				
+					return success;
 				}				
-				ctx.setVariable("passwordResetLink", null);		
-				ctx.setVariable("reportLink", null);			
-				return send(ctx, "password-reset-mail.html", genericFromAddress, genericFromName, userAccount.getEmail());
-			}
-			
-		}	
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+		}		
 		return false;
 	}
 	
