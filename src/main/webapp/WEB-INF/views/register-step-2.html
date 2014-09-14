@@ -13,6 +13,7 @@
 	<link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 	<link href="../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
 	<link href="../../css/sb-admin-2.css" th:href="@{/css/sb-admin-2.css}" rel="stylesheet" />
+	<link href="../../css/jasny-bootstrap.min.css" th:href="@{/css/jasny-bootstrap.min.css}" rel="stylesheet" />
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -35,7 +36,7 @@
 		<div class="panel panel-default">
 		<div class="panel-body">
     	<div class="row">
-    		<div class="col-lg-4">
+    		<div class="col-lg-4 mar-b-0">
 				<div class="panel panel-default">
 				    <div class="panel-heading">
 				        Step 1
@@ -52,7 +53,7 @@
 		                 <p>Upload your latest resume.</p>
 		             </div>
 		         </div>
-		         <div class="panel panel-default">
+		         <div class="panel panel-default mar-b-0">
 		             <div class="panel-heading">
 		                 Step 3
 		             </div>
@@ -63,11 +64,37 @@
     		</div>
     		<div class="col-lg-8">
     			<form method="POST" th:action="@{'/register-step-2'}" th:object="${registrationForm}" enctype="multipart/form-data">
-			        <input type="file" class="mar-t-20" th:field="*{resume}"/>
-			        <div class="float-right mar-t-300">
-						<button type="button" onclick="window.location='show-step-1'" class="btn btn-primary">Back</button>
-						<button type="submit" class="btn btn-primary">Next</button>
-					</div> 
+    				<div class="row">
+	    				<div class="col-lg-2">
+	    				</div>
+	    				<div class="col-lg-8">	
+							<div class="fileinput fileinput-new input-group" style="margin-top:30px;" data-provides="fileinput">
+							  	<div class="form-control" data-trigger="fileinput">
+							  		<i class="glyphicon glyphicon-file fileinput-exists"></i> 
+							  		<span class="fileinput-filename"></span>
+							  	</div>
+							  	<span class="input-group-addon btn btn-default btn-file">
+							  		<span class="fileinput-new">Select file</span>
+							  		<span class="fileinput-exists">Change</span>
+							  		<input type="file" name="..." th:field="*{resume}" 
+							  				accept="application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+							  	</span>
+							  	<a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">
+							  		Remove
+							  	</a>
+							</div>
+						</div>
+						<div class="col-lg-2">
+	    				</div>
+    				</div>
+    				<div class="row">
+    					<div class="col-lg-12">
+				        	<div class="float-right mar-t-265 mar-r-10">
+								<button type="button" onclick="window.location='show-step-1'" class="btn btn-primary">Back</button>
+								<button type="submit" class="btn btn-primary">Next</button>
+							</div>
+	    				</div>
+					</div>
 			    </form>
     		</div>
     	</div>
@@ -77,5 +104,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 	<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
+	<script src="../../js/jasny-bootstrap.min.js" th:src="@{/js/jasny-bootstrap.min.js}"></script>
 </body>
 </html>
