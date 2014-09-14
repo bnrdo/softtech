@@ -37,12 +37,12 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="active" th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/')} ? 'active' : ''"><a href="index.html" th:href="@{/}">Home</a></li>
-                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/about')} ? 'active' : ''"><a href="aboutUs.html" th:href="@{/about}">About us</a></li>
+                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/about')} ? 'active' : ''"><a href="#" th:href="@{/about}">About us</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
-              <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/contact')} ? 'active' : ''"><a href="contactUs.html" th:href="@{/contact}">Contact Us</a></li>
-              <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/signin')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="register.html" th:href="@{/signin}">Sign in</a></li>
-                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/register')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="register.html" th:href="@{/register}">Register</a></li>
+              <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/contact')} ? 'active' : ''"><a href="#" th:href="@{/contact}">Contact Us</a></li>
+              <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/signin')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="#" th:href="@{/signin}">Sign in</a></li>
+                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/show-step-1')} ? 'active' : ''" sec:authorize="isAnonymous()"><a href="#" th:href="@{/show-step-1}">Register</a></li>
                 <li class="dropdown" sec:authorize="isAnonymous()">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Employers <span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">

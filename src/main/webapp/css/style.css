@@ -8,6 +8,17 @@ body {
 	padding-top: 60px;
 }
 
+.mar-l-20{ margin-left: 20px;}
+.mar-t-20{margin-top: 20px;}
+.mar-t-40{margin-top:  45px;}
+.mar-t-150{margin-top:  150px;}
+.mar-t-300{margin-top: 340px;}
+.pad-l-10{padding-left: 10px;}
+.pad-l-0{padding-left: 0px;}
+.pad-r-0{padding-right: 0px;}
+.pad-r-10{padding-right: 10px;}
+.float-right{float: right;}
+
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
