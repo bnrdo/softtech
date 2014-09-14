@@ -5,7 +5,7 @@
 
 	<context-param>
     	<param-name>spring.profiles.active</param-name>
-    	<param-value>production</param-value>
+    	<param-value>development</param-value>
 	</context-param>
 
 	<!-- Ensure UTF-8 character encoding is used -->
@@ -15,6 +15,10 @@
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
 		</init-param>
 		<init-param>
 			<param-name>forceEncoding</param-name>

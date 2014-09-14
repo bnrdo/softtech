@@ -10,6 +10,7 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -33,7 +34,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		
 		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/signin").setViewName("login");
-		registry.addViewController("/register").setViewName("register");
+		/*registry.addViewController("/register-step-1").setViewName("register-step-1");
+		registry.addViewController("/register-step-2").setViewName("register-step-2");
+		registry.addViewController("/register-step-3").setViewName("register-step-3");*/
 		registry.addViewController("/forgotPassword").setViewName("forgotPassword");
 		registry.addViewController("/about").setViewName("aboutUs");
 		registry.addViewController("/employer").setViewName("recruiter/index");
@@ -104,6 +107,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine());
 		viewResolver.setOrder(1);
+		
 		return viewResolver;
 	}
 
@@ -119,4 +123,13 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         
     }
 
+	@Bean
+	public CommonsMultipartResolver multipartResolver(){
+		
+		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+		multipartResolver.setMaxUploadSize(10000);
+		
+		return multipartResolver;
+		
+	}
 }

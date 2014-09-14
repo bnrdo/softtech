@@ -60,3 +60,4 @@ $RECYCLE.BIN/
 .gitattributes
 webapps
 /target
+/bin/

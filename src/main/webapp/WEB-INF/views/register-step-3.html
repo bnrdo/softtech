@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="SoftTech" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<title th:text="#{webapp.title}">SoftTechs</title>
+	
+	<link rel="icon" type="image/ico" href="../../img/favicon.ico" th:href="@{/img/favicon.ico}" />
+	
+	<link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	<link href="../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	<link href="../../css/sb-admin-2.css" th:href="@{/css/sb-admin-2.css}" rel="stylesheet" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    
+    <div th:include="common :: header" role="navigation"></div>
+    
+    <div class="container">
+        <div class="jumbotron">
+	      <div class="container">
+	        <h1>Register</h1>
+	      </div>
+	    </div>
+        <footer th:include="common :: footer"></footer>
+    </div>
+    <div class="container">
+		<div class="panel panel-default">
+		<div class="panel-body">
+    	<div class="row">
+    		<div class="col-lg-4">
+				<div class="panel panel-default">
+				    <div class="panel-heading">
+				        Step 1
+				    </div>
+				    <div class="panel-body">
+				        <p>Select your title, category and technology so that we can asses your application easily.</p>
+				    </div>
+				</div>
+		         <div class="panel panel-default">
+		             <div class="panel-heading">
+		                 Step 2
+		             </div>
+		             <div class="panel-body">
+		                 <p>Upload your latest resume.</p>
+		             </div>
+		         </div>
+		         <div class="panel panel-green">
+		             <div class="panel-heading">
+		                 Step 3
+		             </div>
+		             <div class="panel-body">
+		                 <p>Complete your profile</p>
+		             </div>
+		         </div>
+    		</div>
+    		<div class="col-lg-8">
+    			<form role="form" action="#" th:action="@{'/register-step-3'}" th:object="${registrationForm}" method="POST">
+    				<div class="row mar-t-20">
+						<div class="form-group col-lg-5" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
+							<input id="txtTitle" class="form-control" th:field="*{username}" placeholder="Username"/>
+							<span class='control-label' th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-5" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+							<input type="password" id="txtPassword" class="form-control" th:field="*{password}" placeholder="Password"/>
+							<span class='control-label' th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-5" th:classappend="${#fields.hasErrors('retypePassword')}? 'has-error'">
+							<input type="password" id="txtRetype" class="form-control" th:field="*{retypePassword}" placeholder="Retype Password"/>
+							<span class='control-label' th:if="${#fields.hasErrors('retypePassword')}" th:errors="*{retypePassword}">Error</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-6 pad-r-0" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+							<input type="email" id="txtEmail" class="form-control" th:field="*{email}" placeholder="Email Address"/>
+							<span class='control-label' th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</span>
+						</div>
+						<div class="form-group col-lg-6 pad-l-10" th:classappend="${#fields.hasErrors('contact')}? 'has-error'">
+							<input id="txtContact" class="form-control" th:field="*{contact}" placeholder="Contact"/>
+							<span class='control-label' th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}">Error</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-5 pad-r-0" th:classappend="${#fields.hasErrors('firstname')}? 'has-error'">
+							<input id="txtFirstname" class="form-control" th:field="*{firstname}" placeholder="First Name"/>
+							<span class='control-label' th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Error</span>
+						</div>
+						<div class="form-group col-lg-2 pad-r-10 pad-l-10" th:classappend="${#fields.hasErrors('middleInitial')}? 'has-error'">
+							<input id="txtMiddleInitial" class="form-control" th:field="*{middleInitial}" placeholder="Middle Initial"/>
+						</div>
+						<div class="form-group col-lg-5 pad-l-0" th:classappend="${#fields.hasErrors('lastname')}? 'has-error'">
+							<input id="txtLastname" class="form-control" th:field="*{lastname}" placeholder="Last Name"/>
+							<span class='control-label' th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Error</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-lg-12" th:classappend="${#fields.hasErrors('address')}? 'has-error'">
+							<input id="txtAddress" class="form-control" th:field="*{address}" placeholder="Address"/>
+							<span class='control-label' th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Error</span>
+						</div>
+					</div>
+					<div class="float-right mar-t-40">
+						<button type="button" onclick="window.location='show-step-2'" class="btn btn-primary">Back</button>
+						<button type="submit" class="btn btn-primary">Next</button>
+					</div>
+				</form>
+    		</div>
+    	</div>
+	    </div>
+	    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
+</body>
+</html>

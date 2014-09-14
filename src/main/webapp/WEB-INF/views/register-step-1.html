@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="SoftTech" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<title th:text="#{webapp.title}">SoftTechs</title>
+	
+	<link rel="icon" type="image/ico" href="../../img/favicon.ico" th:href="@{/img/favicon.ico}" />
+	
+	<link href="../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+	<link href="../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	<link href="../../css/sb-admin-2.css" th:href="@{/css/sb-admin-2.css}" rel="stylesheet" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    
+    <div th:include="common :: header" role="navigation"></div>
+    
+    <div class="container">
+        <div class="jumbotron">
+	      <div class="container">
+	        <h1>Register</h1>
+	      </div>
+	    </div>
+        <footer th:include="common :: footer"></footer>
+    </div>
+    <div class="container">
+		<div class="panel panel-default">
+		<div class="panel-body">
+    	<div class="row">
+    		<div class="col-lg-4">
+				<div class="panel panel-green">
+				    <div class="panel-heading">
+				        Step 1
+				    </div>
+				    <div class="panel-body">
+				        <p>Select your title, category and technology so that we can asses your application easily.</p>
+				    </div>
+				</div>
+		         <div class="panel panel-default">
+		             <div class="panel-heading">
+		                 Step 2
+		             </div>
+		             <div class="panel-body">
+		                 <p>Upload your latest resume.</p>
+		             </div>
+		         </div>
+		         <div class="panel panel-default">
+		             <div class="panel-heading">
+		                 Step 3
+		             </div>
+		             <div class="panel-body">
+		                 <p>Complete your profile</p>
+		             </div>
+		         </div>
+    		</div>
+    		<div class="col-lg-8">
+    			<form role="form" action="#" th:action="@{'/register-step-1'}" th:object="${registrationForm}" method="POST">
+					<div class="form-group" th:classappend="${#fields.hasErrors('title')}? 'has-error'">
+						<label class="control-label" for="txtTitle">Title</label> 
+						<input id="txtTitle" class="form-control" th:field="*{title}"/>
+						<span class='control-label' th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</span>
+					</div>
+					<div class="form-group" th:classappend="${#fields.hasErrors('category')}? 'has-error'">
+						<label class="control-label" for="cboCategory">Category</label> 
+						<select class="form-control" id="cboCategory" th:field="*{category}">
+							<option th:each="item : ${categoryList}" th:value="${item}" th:text="${item}"></option>
+						</select>
+						<span class='control-label' th:if="${#fields.hasErrors('category')}" th:errors="*{category}">Error</span>
+					</div>
+					<div class="form-group" th:classappend="${#fields.hasErrors('technology')}? 'has-error'">
+						<label class="control-label" for="cboTechnology">Tecnhology</label> 
+						<select class="form-control" id="cboTechnology" th:field="*{technology}" >
+							<option th:each="item : ${technologyList}" th:value="${item}" th:text="${item}"></option>
+						</select>
+						<span class='control-label' th:if="${#fields.hasErrors('technology')}" th:errors="*{technology}">Error</span>
+					</div>
+					<div class="float-right mar-t-150">
+						<button type="submit" class="btn btn-primary">Next</button>
+					</div>
+				</form>
+    		</div>
+    	</div>
+	    </div>
+	    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
+</body>
+</html>
