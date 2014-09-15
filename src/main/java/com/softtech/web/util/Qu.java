@@ -3,7 +3,7 @@ package com.softtech.web.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quickies {
+public class Qu {
 
 	public static <T> List<T> list(T ... t){
 		List<T> retVal = new ArrayList<T>();

@@ -2,6 +2,7 @@ package com.softtech.web.service;
 
 import java.util.List;
 
+import com.softtech.web.form.Registration;
 import com.softtech.web.model.UserAccount;
 
 public interface UserAccountService {
@@ -21,5 +22,7 @@ public interface UserAccountService {
 	UserAccount findUserAccountByPasswordResetToken(String token);
 
 	void updateUserAccountStatusAndRoles(UserAccount userAccount);
+	
+	UserAccount toUserAccount(Registration regForm);
 	
 }

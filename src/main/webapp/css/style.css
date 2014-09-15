@@ -16,11 +16,16 @@ body {
 .mar-t-40{margin-top:  45px;}
 .mar-t-115{margin-top:  115px;}
 .mar-t-265{margin-top: 265px;}
+.mar-0{margin: 0px;}
 .pad-l-10{padding-left: 10px;}
 .pad-l-0{padding-left: 0px;}
 .pad-r-0{padding-right: 0px;}
 .pad-r-10{padding-right: 10px;}
 .float-right{float: right;}
+.text-center{text-align: center;}
+.hidden{display: none;}
+.visible{display: block;}
+.ellipsis-text-250{overflow: hidden; white-space:nowrap; text-overflow:ellipsis; width:250px; display:inline-block;}
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */

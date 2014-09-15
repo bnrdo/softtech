@@ -127,7 +127,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	public CommonsMultipartResolver multipartResolver(){
 		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-		multipartResolver.setMaxUploadSize(10000);
+		multipartResolver.setMaxUploadSize(5 * 1024 * 1024); //5MB
 		
 		return multipartResolver;
 		
