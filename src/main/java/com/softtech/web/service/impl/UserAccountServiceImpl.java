@@ -11,11 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softtech.web.dao.UserAccountRepository;
+import com.softtech.web.form.Registration;
+import com.softtech.web.model.Address;
+import com.softtech.web.model.Contact;
 import com.softtech.web.model.Role;
+import com.softtech.web.model.User;
 import com.softtech.web.model.UserAccount;
 import com.softtech.web.service.MailService;
 import com.softtech.web.service.RoleService;
 import com.softtech.web.service.UserAccountService;
+import com.softtech.web.util.Qu;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,6 +42,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 	public void addUserAccount(UserAccount userAccount) {
 		
 		List<Role> loadedRoles = new ArrayList<Role>();
+			
 		for(Role role : userAccount.getRoles()) {
 			//id is bound in role name
 			Role roleToAdd = roleService.getRoleById(Integer.parseInt(role.getRoleName()));
@@ -113,5 +119,31 @@ public class UserAccountServiceImpl implements UserAccountService {
 			
 			userAccountRepository.save(origAccount);
 		}		
+	}
+
+	@Override
+	public UserAccount toUserAccount(Registration regForm) {
+		
+		UserAccount account = new UserAccount();
+		account.setEmail(regForm.getEmail());
+		account.setUsername(regForm.getUsername());
+		account.setPassword(regForm.getPassword());
+		
+		Address address = new Address();
+		address.setCity(regForm.getAddress());
+		
+		Contact contact = new Contact();
+		contact.setMobile(regForm.getContact());
+		
+		User user = new User();
+		user.setAddresses(Qu.list(address));
+		user.setAddresses(Qu.list(address));
+		user.setFirstName(regForm.getFirstname());
+		user.setMiddleInitial(regForm.getMiddleInitial());
+		user.setLastName(regForm.getLastname());
+		
+		account.setOwner(user);
+		
+		return account;
 	}	
 }

@@ -21,7 +21,7 @@ import com.softtech.web.annotation.UserExist;
 import com.softtech.web.form.Registration;
 import com.softtech.web.service.UserAccountService;
 
-import static com.softtech.web.util.Quickies.*;
+import static com.softtech.web.util.Qu.*;
 
 public class UserExistValidator implements ConstraintValidator<UserExist, Object>{
 	
@@ -29,12 +29,12 @@ public class UserExistValidator implements ConstraintValidator<UserExist, Object
 	private UserAccountService accountService;
 
     @Override
-    public void initialize(final UserExist constraintAnnotation){
+    public void initialize(UserExist constraintAnnotation){
     	
     }
 
     @Override
-    public boolean isValid(final Object value, final ConstraintValidatorContext context){
+    public boolean isValid(Object value, ConstraintValidatorContext context){
     	
     	String username = (String) value;
     	

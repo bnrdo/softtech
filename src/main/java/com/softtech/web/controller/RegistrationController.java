@@ -1,12 +1,15 @@
 package com.softtech.web.controller;
 
-import static com.softtech.web.util.Quickies.isNull;
-import static com.softtech.web.util.Quickies.list;
+import static com.softtech.web.util.Qu.isNull;
+import static com.softtech.web.util.Qu.list;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.softtech.web.form.Registration;
+import com.softtech.web.service.UserAccountService;
 import com.softtech.web.validation.Step1Validation;
 import com.softtech.web.validation.Step2Validation;
 import com.softtech.web.validation.Step3Validation;
@@ -26,6 +30,9 @@ import com.softtech.web.validation.Step3Validation;
 @Controller
 @SessionAttributes({"registrationForm"})
 public class RegistrationController {
+	
+	@Inject
+	private UserAccountService accountServ;
 	
 	private static final String FORM_REGISTRATION = "registrationForm";
 	
@@ -43,7 +50,9 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/register-step-1", method = RequestMethod.POST)
-	protected String processStep1(@Validated(Step1Validation.class) @ModelAttribute(FORM_REGISTRATION) Registration registrationForm,
+	protected String processStep1(@Validated(Step1Validation.class) 
+									@ModelAttribute(FORM_REGISTRATION) 
+									Registration registrationForm,
 									BindingResult binding, ModelMap model){
 		
 		if(binding.hasErrors()){
@@ -62,7 +71,9 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/register-step-2", method = RequestMethod.POST)
-	protected String processStep2(@Validated(Step2Validation.class) @ModelAttribute(FORM_REGISTRATION) Registration registrationForm){
+	protected String processStep2(@Validated(Step2Validation.class) 
+									@ModelAttribute(FORM_REGISTRATION) 
+									Registration registrationForm){
 		MultipartFile file = registrationForm.getResume();
 		
 		if (!file.isEmpty()) {
@@ -99,17 +110,35 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/register-step-3", method = RequestMethod.POST)
-	protected String processStep3(@Validated(Step3Validation.class) @ModelAttribute(FORM_REGISTRATION) Registration registrationForm,
-									BindingResult binding){
-		
-		/*PasswordMatch pmValidator = new PasswordMatch();
-		pmValidator.validate(registrationForm, binding); */
+	protected String processStep3(@Validated(Step3Validation.class) 
+									@ModelAttribute(FORM_REGISTRATION) 
+									Registration registrationForm,
+									BindingResult binding,
+									HttpSession session,
+									ModelMap model){
 		
 		if(binding.hasErrors()){
 			return "register-step-3";
 		}
 		
-		return "redirect:/show-step-1";
+		/*accountServ.addUserAccount(
+				accountServ.toUserAccount(registrationForm));*/
+		
+		cleanUp(session, model);
+		
+		model.addAttribute("email", registrationForm.getEmail());
+		
+		return "redirect:/show-register-success";
+	}
+	
+	@RequestMapping(value = "/show-register-success", method = RequestMethod.GET)
+	protected String showRegisterSuccess(){
+		return "register-success";
+	}
+	
+	private void cleanUp(HttpSession session, ModelMap model){
+		session.removeAttribute(FORM_REGISTRATION);
+		model.remove(FORM_REGISTRATION);
 	}
 	
 	private void populateCategoryAndTech(ModelMap model){

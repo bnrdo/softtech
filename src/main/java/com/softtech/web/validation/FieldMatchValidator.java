@@ -32,7 +32,7 @@ public abstract class FieldMatchValidator implements ConstraintValidator<Passwor
 	}
 	
     @Override
-    public boolean isValid(final Object value, final ConstraintValidatorContext context){
+    public boolean isValid(Object value, ConstraintValidatorContext context){
         try{
             final Object password = BeanUtils.getProperty(value, PASSWORD_FIELD);
             final Object retypePassword = BeanUtils.getProperty(value, RETYPE_FIELD);
@@ -57,5 +57,5 @@ public abstract class FieldMatchValidator implements ConstraintValidator<Passwor
         return true;
     }
 
-	public abstract void fieldsDontMatchAction(final Object value, final ConstraintValidatorContext context);
+	public abstract void fieldsDontMatchAction(Object value, ConstraintValidatorContext context);
 }
