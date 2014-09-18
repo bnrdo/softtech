@@ -31,6 +31,8 @@ import com.softtech.web.validation.Step3Validation;
 @SessionAttributes({"registrationForm"})
 public class RegistrationController {
 	
+	private enum RegistrationStep{ Step1, Step2, Step3};
+	
 	@Inject
 	private UserAccountService accountServ;
 	
@@ -40,13 +42,14 @@ public class RegistrationController {
 	protected String showStep1(ModelMap model){
 		
 		
+		
 		if(isNull(model.get(FORM_REGISTRATION))){
 			model.addAttribute(FORM_REGISTRATION, new Registration());
 		}
 		
-		populateCategoryAndTech(model);
+		prepareModel(RegistrationStep.Step1, model);
 		
-		return "register-step-1";
+		return "registration";
 	}
 	
 	@RequestMapping(value = "/register-step-1", method = RequestMethod.POST)
@@ -56,9 +59,10 @@ public class RegistrationController {
 									BindingResult binding, ModelMap model){
 		
 		if(binding.hasErrors()){
-			populateCategoryAndTech(model);
 			
-			return "register-step-1";
+			prepareModel(RegistrationStep.Step1, model);
+			
+			return "registration";
 		}
 		
 		return "redirect:/show-step-2";
@@ -66,8 +70,11 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/show-step-2", method = RequestMethod.GET)
-	protected String showStep2(){
-		return "register-step-2";
+	protected String showStep2(ModelMap model){
+		
+		prepareModel(RegistrationStep.Step2, model);
+		
+		return "registration";
 	}
 	
 	@RequestMapping(value = "/register-step-2", method = RequestMethod.POST)
@@ -105,8 +112,11 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/show-step-3", method = RequestMethod.GET)
-	protected String showStep3(){
-		return "register-step-3";
+	protected String showStep3(ModelMap model){
+		
+		prepareModel(RegistrationStep.Step3, model);
+		
+		return "registration";
 	}
 	
 	@RequestMapping(value = "/register-step-3", method = RequestMethod.POST)
@@ -118,7 +128,9 @@ public class RegistrationController {
 									ModelMap model){
 		
 		if(binding.hasErrors()){
-			return "register-step-3";
+			prepareModel(RegistrationStep.Step3, model);
+			
+			return "registration";
 		}
 		
 		/*accountServ.addUserAccount(
@@ -134,6 +146,15 @@ public class RegistrationController {
 	@RequestMapping(value = "/show-register-success", method = RequestMethod.GET)
 	protected String showRegisterSuccess(){
 		return "register-success";
+	}
+	
+	private void prepareModel(RegistrationStep step, ModelMap model){
+		
+		model.addAttribute("step", step);
+		
+		if(step == RegistrationStep.Step1){
+			populateCategoryAndTech(model);
+		}
 	}
 	
 	private void cleanUp(HttpSession session, ModelMap model){
