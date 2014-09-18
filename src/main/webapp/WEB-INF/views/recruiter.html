@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 <li class="active" th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer')} ? 'active' : ''"><a href="index.html" th:href="@{/employer}">Home</a></li>
-                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/searchResume')} ? 'active' : ''"><a href="searchResume.html" th:href="@{/employer/searchResume}">Search Resumes</a></li>
+                <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/recruiter/show-search-resume')} ? 'active' : ''"><a href="searchResume.html" th:href="@{/recruiter/show-search-resume}">Search Resumes</a></li>
                 <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/postJob')} ? 'active' : ''"><a href="postJob.html" th:href="@{/employer/postJob}">Post Jobs</a></li>
                 <li th:class="${#strings.endsWith(#httpServletRequest.getRequestURI(), '/employer/requestPhoneScreen')} ? 'active' : ''"><a href="requestPhoneScreen.html" th:href="@{/employer/requestPhoneScreen}">Request Phone Screen</a></li>
               </ul>

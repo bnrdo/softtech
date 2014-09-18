@@ -12,6 +12,10 @@
 	
 	<link href="../../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 	<link href="../../../css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	
+	<!-- DataTables CSS -->
+    <link href="../../../css/plugins/dataTables.bootstrap.css" th:href="@{/css/plugins/dataTables.bootstrap.css}"  rel="stylesheet"/>
+    
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -31,41 +35,72 @@
     </div>
     <div class="container">
     	<div class="row">
-    		<div class="col-lg-3"></div>
-    		<div class="col-lg-6">
+    		<div class="col-lg-3">
     			<div class="panel panel-default">
-    				<form role="form" action="#" th:action="@{'/recruiter/process-search-resume'}" th:object="${searchForm}" method="POST">
-			             <div class="panel-body">
+		             <div class="panel-body">
+		                 <form>
 		                 	<div class="row">
 		                 		<div class="col-lg-12">
 		                 		<label class="control-label" for="txtTitle">Title</label> 
-								<input id="txtTitle" class="form-control" th:field="*{title}"/>
+								<input id="txtTitle" class="form-control"/>
 								</div>
 		                 	</div>
 		                 	<div class="row">
 		                 		<div class="col-lg-12">
 		                 		<label class="control-label" for="cboCategory">Category</label> 
-								<select class="form-control" id="cboCategory" th:field="*{category}">
-									<option th:each="item : ${categoryList}" th:value="${item}" th:text="${item}"></option>
+								<select class="form-control" id="cboCategory">
+									<option value="1" label="1"></option>
+									<option value="2" label="2"></option>
+									<option value="3" label="3"></option>
 								</select>
 								</div>
 		                 	</div>
-			             </div>
-			             <div class="panel-footer">
-							<input type="submit" class="btn btn-primary" value="Search"/>
-			             </div>
-		             </form>
+		                 </form>
+		             </div>
+		             <div class="panel-footer">
+						<button type="submit" class="btn btn-primary">Search</button>
+		             </div>
 		         </div>
     		</div>
-    		<div class="col-lg-3"></div>
+    		<div class="col-lg-9">
+    			<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover" id="tbl-resume">
+						<thead>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+    		</div>    		
     	</div>
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <br/><br/><br/><br/>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="../../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 	<script src="../../js/recruiter/index.js" th:src="@{/js/recruiter/index.js}"></script>
+	
+	<!-- DataTables JavaScript -->
+	<script src="../../../js/plugins/dataTables/jquery.dataTables.js" th:src="@{/js/plugins/dataTables/jquery.dataTables.js}"></script>
+	<script src="../../../js/plugins/dataTables/dataTables.bootstrap.js" th:src="@{/js/plugins/dataTables/dataTables.bootstrap.js}"></script>
+	
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+		$(document).ready(function() {
+			
+			var table = $('#tbl-resume').dataTable({
+				lengthChange : false,
+				ajax : /*[[${url}]]*/ 'static is deadly',
+				bFilter : false,
+				columns : [
+				           {data : 'accountId', title : 'Id'},
+				           {data : 'firstName', title : 'First Name'},
+				           {data : 'lastName', title : 'Last Name'},
+				           {data : 'contact', title : 'Contact'}
+					]
+			});
+		});
+		/*]]>*/
+		</script>
 </body>
 </html>
