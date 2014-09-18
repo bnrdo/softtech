@@ -144,8 +144,11 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/show-register-success", method = RequestMethod.GET)
-	protected String showRegisterSuccess(){
-		return "register-success";
+	protected String showRegisterSuccess(ModelMap model){
+		
+		model.addAttribute("successMessage", "Registration Success!<br/>Account verification link was sent to your email ");
+		
+		return "success";
 	}
 	
 	private void prepareModel(RegistrationStep step, ModelMap model){
