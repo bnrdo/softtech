@@ -11,8 +11,10 @@ body {
 .mar-b-0{ margin-bottom: 0px !important;}
 .mar-l-20{ margin-left: 20px;}
 .mar-r-20{ margin-right: 20px;}
+.mar-t-15{margin-top: 15px;}
 .mar-t-20{margin-top: 20px;}
 .mar-t-25{margin-top: 25px;}
+.mar-t-30{margin-top: 30px;}
 .mar-t-40{margin-top:  45px;}
 .mar-t-115{margin-top:  115px;}
 .mar-t-265{margin-top: 265px;}
@@ -25,7 +27,8 @@ body {
 .text-center{text-align: center;}
 .hidden{display: none;}
 .visible{display: block;}
-.ellipsis-text-250{overflow: hidden; white-space:nowrap; text-overflow:ellipsis; width:250px; display:inline-block;}
+
+/*==================================*/
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
