@@ -132,4 +132,14 @@ public class Registration {
 	public void setResume(MultipartFile resume) {
 		this.resume = resume;
 	}
+	
+	public static void copyCompleteRegData(Registration source, Registration dest){
+		dest.setUsername(source == null ? null : source.getUsername());
+		dest.setEmail(source == null ? null : source.getEmail());
+		dest.setFirstname(source == null ? null : source.getFirstname());
+		dest.setLastname(source == null ? null : source.getLastname());
+		dest.setMiddleInitial(source == null ? null : source.getMiddleInitial());
+		dest.setAddress(source == null ? null : source.getAddress());
+		dest.setContact(source == null ? null : source.getContact());
+	}
 }

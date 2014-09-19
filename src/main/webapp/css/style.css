@@ -18,10 +18,11 @@ body {
 .mar-t-40{margin-top:  45px;}
 .mar-t-115{margin-top:  115px;}
 .mar-t-265{margin-top: 265px;}
+.mar-t-240{margin-top: 240px;}
 .mar-0{margin: 0px;}
 .pad-l-10{padding-left: 10px;}
 .pad-l-0{padding-left: 0px;}
- .pad-l-r-5{padding-left: 5px; padding-right: 5px;}
+.pad-l-r-5{padding-left: 5px; padding-right: 5px;}
 .pad-r-0{padding-right: 0px;}
 .pad-r-10{padding-right: 10px;}
 .float-right{float: right;}
@@ -186,38 +187,6 @@ body {
   .featurette-heading {
     margin-top: 120px;
   }
-}
-
-.alertMessage {
-    position: fixed;
-    top: 5%;
-    left: 50%;
-    margin-left: -150px;
-    width: 300px;
-    z-index: 9999;
-}
-
-.btn-file {
-  position: relative;
-  overflow: hidden;
-}
-.btn-file input[type=file] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  min-width: 100%;
-  min-height: 100%;
-  font-size: 100px;
-  text-align: right;
-  filter: alpha(opacity=0);
-  opacity: 0;
-  background: red;
-  cursor: inherit;
-  display: block;
-}
-input[readonly] {
-  background-color: white !important;
-  cursor: text !important;
 }
 
 /* Sign in */
