@@ -58,16 +58,20 @@ public class UserAccount implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date passwordResetSentDate;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
+	
 	public UserAccount() { }
 
 	public UserAccount(int id, String username, String password, List<Role> roles,
-			UserStatus status) {
+			UserStatus status, Date creationDate) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.roles = roles;
 		this.status = status;
+		this.creationDate = creationDate;
 	}
 
 	public int getId() {
@@ -155,6 +159,14 @@ public class UserAccount implements Serializable {
 
 	public void setPasswordResetSentDate(Date passwordResetSentDate) {
 		this.passwordResetSentDate = passwordResetSentDate;
+	}
+	
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 	
 }

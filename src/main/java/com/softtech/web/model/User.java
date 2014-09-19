@@ -52,12 +52,12 @@ public class User {
 	private User recruiter;
 	
 	@ElementCollection
-	@CollectionTable(name="PromoCodes", joinColumns=@JoinColumn(name="user_id"))
+	@CollectionTable(name="promocodes", joinColumns=@JoinColumn(name="user_id"))
 	@Column(name="promoCode")
 	private Collection<String> promoCodes;
 	
 	@ElementCollection
-	@CollectionTable(name="Notes", joinColumns=@JoinColumn(name="user_id"))
+	@CollectionTable(name="notes", joinColumns=@JoinColumn(name="user_id"))
 	@Column(name="note")
 	private Collection<String> notes;
 	
