@@ -126,56 +126,62 @@
 				
 				<!-- Step 3 -->
 				<div th:if="${step.name() == 'Step3'}" class="mar-t-30">
+					<div class="form-group">
+						<div class="radio"><label><input type="radio" name="optCompleteProfile" id="optUseExisting" value="optUseExisting" onchange="switchUseExisting()"/>Use existing account</label></div>
+						<div class="radio"><label><input type="radio" name="optCompleteProfile" id="optCreateNew" value="optCreateNew" onchange="switchCreateNew()"/>Create new account</label></div>
+                    </div>
 					<form role="form" action="#" th:action="@{'/register-step-3'}" th:object="${registrationForm}" method="POST">
-	    				<div class="row mar-t-20">
-							<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
-								<input id="txtTitle" class="form-control" th:field="*{username}" placeholder="Username"/>
-								<span class='control-label' th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</span>
+						<div id="create-new">
+		    				<div class="row mar-t-20">
+								<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
+									<input id="txtTitle" class="form-control" th:field="*{username}" placeholder="Username"/>
+									<span class='control-label' th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Error</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+									<input type="password" id="txtPassword" class="form-control" th:field="*{password}" placeholder="Password"/>
+									<span class='control-label' th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('retypePassword')}? 'has-error'">
+									<input type="password" id="txtRetype" class="form-control" th:field="*{retypePassword}" placeholder="Retype Password"/>
+									<span class='control-label' th:if="${#fields.hasErrors('retypePassword')}" th:errors="*{retypePassword}">Error</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-6 pad-l-r-5" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+									<input type="email" id="txtEmail" class="form-control" th:field="*{email}" placeholder="Email Address"/>
+									<span class='control-label' th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</span>
+								</div>
+								<div class="form-group col-lg-6 pad-l-r-5" th:classappend="${#fields.hasErrors('contact')}? 'has-error'">
+									<input id="txtContact" class="form-control" th:field="*{contact}" placeholder="Contact"/>
+									<span class='control-label' th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}">Error</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('firstname')}? 'has-error'">
+									<input id="txtFirstname" class="form-control" th:field="*{firstname}" placeholder="First Name"/>
+									<span class='control-label' th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Error</span>
+								</div>
+								<div class="form-group col-lg-2 pad-l-r-5" th:classappend="${#fields.hasErrors('middleInitial')}? 'has-error'">
+									<input id="txtMiddleInitial" class="form-control" th:field="*{middleInitial}" placeholder="Middle Initial"/>
+								</div>
+								<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('lastname')}? 'has-error'">
+									<input id="txtLastname" class="form-control" th:field="*{lastname}" placeholder="Last Name"/>
+									<span class='control-label' th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Error</span>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-lg-12 pad-l-r-5" th:classappend="${#fields.hasErrors('address')}? 'has-error'">
+									<input id="txtAddress" class="form-control" th:field="*{address}" placeholder="Address"/>
+									<span class='control-label' th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Error</span>
+								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
-								<input type="password" id="txtPassword" class="form-control" th:field="*{password}" placeholder="Password"/>
-								<span class='control-label' th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('retypePassword')}? 'has-error'">
-								<input type="password" id="txtRetype" class="form-control" th:field="*{retypePassword}" placeholder="Retype Password"/>
-								<span class='control-label' th:if="${#fields.hasErrors('retypePassword')}" th:errors="*{retypePassword}">Error</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-lg-6 pad-l-r-5" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
-								<input type="email" id="txtEmail" class="form-control" th:field="*{email}" placeholder="Email Address"/>
-								<span class='control-label' th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error</span>
-							</div>
-							<div class="form-group col-lg-6 pad-l-r-5" th:classappend="${#fields.hasErrors('contact')}? 'has-error'">
-								<input id="txtContact" class="form-control" th:field="*{contact}" placeholder="Contact"/>
-								<span class='control-label' th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}">Error</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('firstname')}? 'has-error'">
-								<input id="txtFirstname" class="form-control" th:field="*{firstname}" placeholder="First Name"/>
-								<span class='control-label' th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">Error</span>
-							</div>
-							<div class="form-group col-lg-2 pad-l-r-5" th:classappend="${#fields.hasErrors('middleInitial')}? 'has-error'">
-								<input id="txtMiddleInitial" class="form-control" th:field="*{middleInitial}" placeholder="Middle Initial"/>
-							</div>
-							<div class="form-group col-lg-5 pad-l-r-5" th:classappend="${#fields.hasErrors('lastname')}? 'has-error'">
-								<input id="txtLastname" class="form-control" th:field="*{lastname}" placeholder="Last Name"/>
-								<span class='control-label' th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Error</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-lg-12 pad-l-r-5" th:classappend="${#fields.hasErrors('address')}? 'has-error'">
-								<input id="txtAddress" class="form-control" th:field="*{address}" placeholder="Address"/>
-								<span class='control-label' th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Error</span>
-							</div>
-						</div>
-						<div class="float-right mar-t-25">
-							<button type="button" onclick="window.location='show-step-2'" class="btn btn-primary">Back</button>
+						<div class="float-right mar-t-25" id="step3-btn-wrapper">
+							<button type="button" onclick="preserveFormThenBack()" class="btn btn-primary">Back</button>
 							<button type="submit" class="btn btn-primary">Next</button>
 						</div>
 					</form>
@@ -190,7 +196,7 @@
 	<script src="../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
 	<script src="../../js/index.js" th:src="@{/js/index.js}"></script>
 	<script src="../../js/jasny-bootstrap.min.js" th:src="@{/js/jasny-bootstrap.min.js}"></script>
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
 	//<![CDATA[
 		var isValid = false;
 	           
@@ -235,6 +241,28 @@
 	    	filediv.addClass('hidden');
 		}
 		
+		function switchUseExisting(){
+			$('#create-new').hide();
+			$('#optUseExisting').prop('checked', true);
+			$('#step3-btn-wrapper').addClass('mar-t-240');
+			
+			$.ajax({
+				url: "/regist-switch-mode?mode=UseExisting",
+				cacheable: false
+			})
+		}
+		
+		function switchCreateNew(){
+			$('#create-new').show();
+			$('#optCreateNew').prop('checked', true);
+			$('#step3-btn-wrapper').removeClass('mar-t-240');
+			
+			$.ajax({
+				url: "/regist-switch-mode?mode=CreateNew",
+				cacheable: false
+			})
+		}
+		
 		function doNext(e){
 			if(!isValid){
 				showError();
@@ -245,6 +273,50 @@
 				$('#uploadForm').submit();
 			}
 		}
+		
+		function preserveFormThenBack(){
+			
+			var formData = new Object();
+			
+			formData.username 			= $('#txtTitle').val();	
+			formData.retypePassword     = $('#txtRetype').val();	      
+			formData.email              = $('#txtEmail').val();	      
+			formData.contact            = $('#txtContact').val();	      
+			formData.firstname          = $('#txtFirstname').val();      
+			formData.lastname           = $('#txtLastname').val();      
+			formData.address            = $('#txtAddress').val();
+			formData.middleInitial      = $('#txtMiddleInitial').val();
+			
+			$.ajax({
+			       url : '/regist-preserve-form-then-show-step-2',
+			       type : 'POST',
+			       contentType : 'application/json',
+			       data : JSON.stringify(formData),
+			       success : function(data){
+			    	   window.location = 'show-step-2';
+			       }
+				});
+		}
+		
+		$(document).ready(function () {
+			 var step = /*[[${step.name()}]]*/ 'stepvar';
+			 
+			 if(step === 'Step1'){
+				 //do step1 onload
+			 }else if(step === 'Step2'){
+				//do step2 onload
+			 }else if(step === 'Step3'){
+				//do step3 onload
+				
+				var mode = /*[[${mode}]]*/ 'modevar';
+				
+				if(mode === 'CreateNew'){
+					switchCreateNew();
+				}else{
+					switchUseExisting();
+				}
+			 }
+		});
 	//]]>
 	</script>
 </body>

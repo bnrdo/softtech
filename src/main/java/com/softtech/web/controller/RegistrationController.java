@@ -16,8 +16,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,10 +31,13 @@ import com.softtech.web.validation.Step2Validation;
 import com.softtech.web.validation.Step3Validation;
 
 @Controller
-@SessionAttributes({"registrationForm"})
+@SessionAttributes({"registrationForm", "mode"}) //mode is for step 3
 public class RegistrationController {
 	
 	private enum RegistrationStep{ Step1, Step2, Step3};
+	
+	private static final String MODE_REG_USE_EXISTING = "UseExisting";
+	private static final String MODE_REG_CREATE_NEW = "CreateNew";
 	
 	@Inject
 	private UserAccountService accountServ;
@@ -47,7 +53,9 @@ public class RegistrationController {
 			model.addAttribute(FORM_REGISTRATION, new Registration());
 		}
 		
-		prepareModel(RegistrationStep.Step1, model);
+		model.addAttribute("step", RegistrationStep.Step1);
+		
+		populateCategoryAndTech(model);
 		
 		return "registration";
 	}
@@ -60,7 +68,7 @@ public class RegistrationController {
 		
 		if(binding.hasErrors()){
 			
-			prepareModel(RegistrationStep.Step1, model);
+			model.addAttribute("step", RegistrationStep.Step1);
 			
 			return "registration";
 		}
@@ -72,7 +80,7 @@ public class RegistrationController {
 	@RequestMapping(value = "/show-step-2", method = RequestMethod.GET)
 	protected String showStep2(ModelMap model){
 		
-		prepareModel(RegistrationStep.Step2, model);
+		model.addAttribute("step", RegistrationStep.Step2);
 		
 		return "registration";
 	}
@@ -114,7 +122,7 @@ public class RegistrationController {
 	@RequestMapping(value = "/show-step-3", method = RequestMethod.GET)
 	protected String showStep3(ModelMap model){
 		
-		prepareModel(RegistrationStep.Step3, model);
+		model.addAttribute("step", RegistrationStep.Step3);
 		
 		return "registration";
 	}
@@ -128,7 +136,8 @@ public class RegistrationController {
 									ModelMap model){
 		
 		if(binding.hasErrors()){
-			prepareModel(RegistrationStep.Step3, model);
+			
+			model.addAttribute("step", RegistrationStep.Step3);
 			
 			return "registration";
 		}
@@ -136,9 +145,13 @@ public class RegistrationController {
 		/*accountServ.addUserAccount(
 				accountServ.toUserAccount(registrationForm));*/
 		
-		cleanUp(session, model);
+		if(MODE_REG_CREATE_NEW.equals(model.get("mode"))){
+			//authenticate if logged in or not?
+		}else{
+			//send email verification
+		}
 		
-		model.addAttribute("email", registrationForm.getEmail());
+		cleanUp(session, model);
 		
 		return "redirect:/show-register-success";
 	}
@@ -151,14 +164,25 @@ public class RegistrationController {
 		return "success";
 	}
 	
-	private void prepareModel(RegistrationStep step, ModelMap model){
-		
-		model.addAttribute("step", step);
-		
-		if(step == RegistrationStep.Step1){
-			populateCategoryAndTech(model);
-		}
+	@RequestMapping(value = "/regist-switch-mode", method = RequestMethod.GET)
+	@ResponseBody
+	protected void changeMode(@RequestParam String mode, ModelMap model){
+		model.addAttribute("mode", mode);
 	}
+	
+	@RequestMapping(value = "/regist-preserve-form-then-show-step-2", method = RequestMethod.POST)
+	@ResponseBody
+	protected void preserveFormThenShowStep2( @RequestBody Registration preserveForm, ModelMap model){
+		Registration form = (Registration) model.get(FORM_REGISTRATION);
+		
+		if(MODE_REG_USE_EXISTING.equals(model.get("mode"))){
+			preserveForm = null;
+		}
+		
+		Registration.copyCompleteRegData(preserveForm, form);
+	}
+	
+	
 	
 	private void cleanUp(HttpSession session, ModelMap model){
 		session.removeAttribute(FORM_REGISTRATION);
