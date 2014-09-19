@@ -19,7 +19,7 @@ public class MainController {
 		if(recruiterRole(request)) return "recruiter/index";
 		if(request.isUserInRole(Role.USER.getRoleName())) return "index";		
 		
-		return "index";
+		return "/recruiter/index";
 		
 	}
 
