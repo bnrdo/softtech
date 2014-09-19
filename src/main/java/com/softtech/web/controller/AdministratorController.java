@@ -1,5 +1,6 @@
 package com.softtech.web.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -68,6 +69,7 @@ public class AdministratorController {
 					userAccount.setPassword(PasswordUtil.generateDefaultPassword());
 					userAccount.setOwner(freshUser);
 					userAccount.setStatus(UserStatus.INACTIVE);
+					userAccount.setCreationDate(new Date());
 					userAccountService.addUserAccount(userAccount);	
 				}else{
 					return "redirect:/admin/createUserAccount?accountExists=1";	

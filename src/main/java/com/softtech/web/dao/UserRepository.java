@@ -6,6 +6,5 @@ import com.softtech.web.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
-	
-	
+		
 }
